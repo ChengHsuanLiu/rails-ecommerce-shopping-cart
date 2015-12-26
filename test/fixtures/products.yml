@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  breif: MyText
+  description: MyText
+  list_price: 1.5
+  sale_price: 1.5
+  stock: 1
+  sku: MyString
+  weight: 1.5
+  height: 1.5
+  length: 1.5
+  width: 1.5
+  type: 
+  public: false
+  available: false
+  brand_id: 1
+
+two:
+  name: MyString
+  breif: MyText
+  description: MyText
+  list_price: 1.5
+  sale_price: 1.5
+  stock: 1
+  sku: MyString
+  weight: 1.5
+  height: 1.5
+  length: 1.5
+  width: 1.5
+  type: 
+  public: false
+  available: false
+  brand_id: 1

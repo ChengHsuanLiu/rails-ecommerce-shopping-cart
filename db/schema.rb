@@ -11,20 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225140421) do
+ActiveRecord::Schema.define(version: 20151226131846) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "order_states", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -74,6 +67,16 @@ ActiveRecord::Schema.define(version: 20151225140421) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_child_products", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "child_product_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "product_child_products", ["child_product_id"], name: "index_product_child_products_on_child_product_id"
+  add_index "product_child_products", ["product_id"], name: "index_product_child_products_on_product_id"
+
   create_table "product_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -85,6 +88,52 @@ ActiveRecord::Schema.define(version: 20151225140421) do
 
   create_table "product_images", force: :cascade do |t|
     t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_variation_values", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_variation_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "product_variations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "breif"
+    t.text     "description"
+    t.float    "list_price"
+    t.float    "sale_price"
+    t.integer  "stock"
+    t.string   "sku"
+    t.float    "weight"
+    t.float    "height"
+    t.float    "length"
+    t.float    "width"
+    t.boolean  "is_multi_option"
+    t.boolean  "public"
+    t.boolean  "available"
+    t.integer  "brand_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "is_child_product"
+    t.integer  "parent_product_id"
+    t.integer  "product_variation_id"
+    t.integer  "product_variation_value_id"
+  end
+
+  create_table "user_cart_items", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

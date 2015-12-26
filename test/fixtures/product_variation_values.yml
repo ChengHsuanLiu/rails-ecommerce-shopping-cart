@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  code: MyString
+  product_variation_id: 1
 
 two:
   name: MyString
-  code: MyString
+  product_variation_id: 1
