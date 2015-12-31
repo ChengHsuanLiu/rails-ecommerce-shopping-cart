@@ -1,0 +1,41 @@
+.side-menu{
+	position: fixed;
+	padding-top: 60px;
+	left: 0;
+	top: 0;
+	width: 300px;
+	height: 100%;
+
+	.side-menu-inner{
+		height: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+}
+.admin-body--right{
+	margin-left: 300px;
+	margin-right: auto;
+	padding-top: 48px;
+}
+.side-menu{
+	.collapsible{
+		border-right: none;
+		border-top: none;
+		box-shadow: none;
+
+		.collapsible-header{
+			border-bottom: none;
+		}
+		.collapsible-body{
+			border-bottom: none;
+		}
+	}
+}
+.fixed-nav{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+}

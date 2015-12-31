@@ -1,0 +1,8 @@
+
+	<p>文章標題</p>
+	<%= f.text_field :title %>
+	<p>文章分類</p>
+	<%= f.collection_select(:post_category_id, PostCategory.all, :id, :name, {}, {:class=> 'browser-default'}) %>
+	<p>內文</p>
+	<%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 %>
+	<%= f.submit "Submit", class:'btn' %>

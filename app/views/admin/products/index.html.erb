@@ -1,0 +1,44 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col s12">
+			<h4>商品總覽</h4>
+			<a href="#" class="btn">新增商品</a>
+
+			<div class="admin-table-container">
+	      <table>
+	        <thead>
+	          <tr>
+	              <th data-field="name">名稱</th>
+	              <th data-field="sku">貨號</th>
+	              <th data-field="price">價格</th>
+	              <th data-field="brand">品牌</th>
+	              <th data-field="updated_at">日期</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	        	<% @products.each do |p| %>
+		          <tr>
+		            <td><a href="<%= edit_admin_product_path(p) %>"><%= p.name %></a></td>
+		            <td><%= p.sku %></td>
+		            <td>
+		            	定價：<%= p.list_price %><br>
+		            	售價：<%= p.sale_price %>
+		            </td>
+		            <td>
+		            	<% if p.brand %>
+		            		<%= p.brand.name %>
+		            	<% else %>
+		            		無品牌
+		            	<% end %>
+		            </td>
+		            <td><%= p.updated_at %></td>
+		          </tr>
+	        	<% end %>
+	        </tbody>
+	      </table>
+			</div>
+
+		</div>
+	</div>
+</div>

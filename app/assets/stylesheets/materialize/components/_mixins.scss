@@ -1,0 +1,21 @@
+@mixin box-shadow-2($args1, $args2) {
+    -webkit-box-shadow: $args1, $args2;
+    -moz-box-shadow: $args1, $args2;
+    box-shadow: $args1, $args2;
+}
+
+@mixin translate($X, $Y){
+	transform: translate($X, $Y);
+	-webkit-transform: translate($X, $Y);
+	-o-transform: translate($X, $Y);
+	-ms-transform: translate($X, $Y);
+	-moz-transform: translate($X, $Y);
+}
+
+@mixin transition-certain( $args1 , $duration ){
+	transition: $args1 $duration;
+	-webkit-transition: $args1 $duration;
+	-o-transition: $args1 $duration;
+	-ms-transition: $args1 $duration;
+	-moz-transition: $args1 $duration;
+}

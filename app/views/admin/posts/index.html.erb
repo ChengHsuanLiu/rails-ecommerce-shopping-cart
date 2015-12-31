@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col s12">
+			<h4>文章總覽</h4>
+			<a href="#" class="btn">新增文章</a>
+
+			<div class="admin-table-container">
+	      <table>
+	        <thead>
+	          <tr>
+	              <th data-field="name">標題</th>
+	              <th data-field="post_category">分類</th>
+	              <th data-field="updated_at">日期</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	        	<% @posts.each do |p| %>
+		          <tr>
+		            <td><a href="<%= edit_admin_post_path(p) %>"><%= p.title %></a></td>
+		            <td><%= p.post_category.name %></td>
+		            <td><%= p.updated_at %></td>
+		          </tr>
+	        	<% end %>
+	        </tbody>
+	      </table>
+			</div>
+
+		</div>
+	</div>
+</div>

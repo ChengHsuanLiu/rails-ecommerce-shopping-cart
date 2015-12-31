@@ -1,0 +1,57 @@
+<div class="side-menu">
+	<div class="side-menu-inner">
+		<ul class="collapsible" data-collapsible="accordion">
+
+			<li>
+				<a href="#">
+					<div class="collapsible-header">訂單管理</div>
+				</a>
+			</li>
+
+	    <li>
+	      <div class="collapsible-header">商品管理區</div>
+	      <div class="collapsible-body">
+	      	<ul>
+	      		<li><a href="<%= admin_products_path %>">商品</a></li>
+	      		<li><a href="<%= new_admin_product_path %>">新增商品</a></li>
+	      		<li><a href="#">商品分類</a></li>
+	      		<li><a href="<%= admin_brands_path %>">商品品牌</a></li>
+	      	</ul>
+	      </div>
+	    </li>
+
+	    <li>
+	      <div class="collapsible-header">文章管理區</div>
+	      <div class="collapsible-body">
+	      	<ul>
+	      		<li><a href="<%= admin_posts_path %>">文章</a></li>
+	      		<li><a href="<%= new_admin_post_path %>">新增文章</a></li>
+	      		<li><a href="<%= admin_post_categories_path %>">文章分類</a></li>
+	      	</ul>
+	      </div>
+	    </li>
+
+			<li>
+				<a href="#">
+					<div class="collapsible-header">回應管理</div>
+				</a>
+			</li>
+
+	    <li>
+	    	<a href="#">
+		      <div class="collapsible-header">會員管理</div>
+	      </a>
+	    </li>
+	  </ul>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+
+</script>
