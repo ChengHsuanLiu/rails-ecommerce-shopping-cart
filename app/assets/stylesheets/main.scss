@@ -1,37 +1,5 @@
-.side-menu{
-	position: fixed;
-	padding-top: 60px;
-	left: 0;
-	top: 0;
-	width: 300px;
-	height: 100%;
+@import "./ripple-preloader";
 
-	.side-menu-inner{
-		height: 100%;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-
-}
-.admin-body--right{
-	margin-left: 300px;
-	margin-right: auto;
-	padding-top: 48px;
-}
-.side-menu{
-	.collapsible{
-		border-right: none;
-		border-top: none;
-		box-shadow: none;
-
-		.collapsible-header{
-			border-bottom: none;
-		}
-		.collapsible-body{
-			border-bottom: none;
-		}
-	}
-}
 .fixed-nav{
 	position: fixed;
 	top: 0;
@@ -39,3 +7,113 @@
 	width: 100%;
 	z-index: 999;
 }
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+	background-color: #FFF;
+	border: 1px solid #c5c5c5;
+	border-radius: 4px;
+	padding: 0 8px;
+	color: #575a63;
+	margin: 0px;
+	width: calc(100% - 12px);
+
+	&:focus{
+		border: 1px solid $secondary-color !important;
+		box-shadow: none !important;
+	}
+}
+.tab-content{
+	padding: 48px 12px !important;
+	background-color: #FFF;
+}
+
+.hr{
+	background-color: #EEE;
+	height: 1px;
+
+	&.margin-m{
+		margin: 24px 0;
+	}
+}
+
+.btn-bar{
+	padding: 12px 12px;
+
+	&.align-right{
+		text-align: right;
+	}
+}
+
+.clear-both{
+	clear: both;
+}
+
+.search-box{
+	display: inline;
+
+	&.search-box--right{
+		text-align: right;
+	}
+	&.search-box--left{
+		text-align: left;
+	}
+
+	.search-box-input{
+		max-width: 180px;
+		display: inline-block;
+		vertical-align: middle;
+		height: 2.4rem;
+	}
+
+	.search-box-submit{
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.icon-btn{
+	color: #575a63;
+	display: inline-block;
+	margin: 0 4px;
+
+	> i{
+		vertical-align: middle;
+	}
+}
+
+.preloader-container{
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10000;
+	background-color: rgba(0,0,0,.4);
+	transition: opacity 0.5s, visibility 0.5s;
+	-webkit-transition: opacity 0.5s, visibility 0.5s;
+	-moz-transition: opacity 0.5s, visibility 0.5s;
+	-o-transition: opacity 0.5s, visibility 0.5s;
+	-ms-transition: opacity 0.5s, visibility 0.5s;
+	opacity: 0;
+	visibility: hidden;
+
+	&.active{
+		opacity: 1;
+		visibility: visible;
+	}
+
+
+	> div{
+		width: 200px;
+		height: 200px;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+	}
+}
+
