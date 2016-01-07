@@ -4,12 +4,12 @@
 
 			<li>
 				<a href="#">
-					<div class="collapsible-header">訂單管理</div>
+					<div class="collapsible-header"><i class="material-icons">list</i>訂單管理</div>
 				</a>
 			</li>
 
 	    <li>
-	      <div class="collapsible-header">商品管理區</div>
+	      <div class="collapsible-header"><i class="material-icons">shopping_cart</i>商品管理區</div>
 	      <div class="collapsible-body">
 	      	<ul>
 	      		<li><a href="<%= admin_products_path %>">商品</a></li>
@@ -21,7 +21,7 @@
 	    </li>
 
 	    <li>
-	      <div class="collapsible-header">文章管理區</div>
+	      <div class="collapsible-header"><i class="material-icons">description</i>文章管理區</div>
 	      <div class="collapsible-body">
 	      	<ul>
 	      		<li><a href="<%= admin_posts_path %>">文章</a></li>
@@ -32,14 +32,18 @@
 	    </li>
 
 			<li>
-				<a href="#">
-					<div class="collapsible-header">回應管理</div>
-				</a>
+	      <div class="collapsible-header"><i class="material-icons">comment</i>回應管理</div>
+	      <div class="collapsible-body">
+	      	<ul>
+	      		<li><a href="<%= admin_posts_path %>">文章回應</a></li>
+	      		<li><a href="<%= new_admin_post_path %>">商品回應</a></li>
+	      	</ul>
+	      </div>
 			</li>
 
 	    <li>
 	    	<a href="#">
-		      <div class="collapsible-header">會員管理</div>
+		      <div class="collapsible-header"><i class="material-icons">face</i>會員管理</div>
 	      </a>
 	    </li>
 	  </ul>

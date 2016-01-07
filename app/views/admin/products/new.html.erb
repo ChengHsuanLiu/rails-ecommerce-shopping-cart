@@ -1,3 +1,300 @@
 <%= form_for @product, :url => admin_products_path do |f| %>
-	<%= render :partial => 'form', :locals => { :f => f } %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col m8 s12">
+				<div class="row">
+					<div class="col s12">
+						<h4>新增商品</h4>
+					</div>
+					<p class="col m3 s12">名稱</p>
+					<%= f.text_field :name, class: 'col m9 s12' %>
+				</div>
+				<div class="row">
+					<p class="col m3 s12">品牌</p>
+					<div class="col m9 s12 no-padding">
+						<%= f.collection_select(:brand_id, Brand.all, :id, :name, {}, {:class=> 'browser-default'}) %>
+					</div>
+				</div>
+				<div class="row">
+					<p class="col m3 s12">簡述</p>
+					<%= f.text_field :brief, class: 'col m9 s12' %>
+				</div>
+				<div class="row">
+					<p class="col s12">詳細內容</p>
+					<div class="col s12">
+						<%= f.text_area :description %>
+					</div>
+				</div>
+			  <div class="row">
+			    <div class="col s12 no-padding">
+			      <ul class="tabs">
+			        <li class="tab col s3"><a class="active" href="#normal">一般</a></li>
+			        <li class="tab col s3"><a href="#standard">規格</a></li>
+			        <li class="tab col s3"><a href="#variations">變化種類</a></li>
+			        <li class="tab col s3"><a href="#attributes">自訂屬性</a></li>
+			      </ul>
+			    </div>
+			    <div id="normal" class="col s12 tab-content">
+			    	<div class="row">
+							<p class="col m3 s12">貨號</p>
+							<%= f.text_field :sku, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">定價</p>
+							<%= f.text_field :list_price, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">售價</p>
+							<%= f.text_field :sale_price, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">庫存</p>
+							<%= f.number_field :stock, class: 'col m9 s12' %>
+			    	</div>
+			    </div>
+			    <div id="standard" class="col s12 tab-content">
+			    	<div class="row">
+							<p class="col m3 s12">重量</p>
+							<%= f.text_field :weight, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">高度</p>
+							<%= f.text_field :height, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">長度</p>
+							<%= f.text_field :length, class: 'col m9 s12' %>
+						</div>
+						<div class="row">
+							<p class="col m3 s12">寬度</p>
+							<%= f.text_field :width, class: 'col m9 s12' %>
+						</div>
+			    </div>
+			    <div id="variations" class="col s12 tab-content">
+			    	<div class="row">
+			    		<div class="col s12">
+								<p>商品選項</p>
+								<div class="switch">
+								  <label>
+								    無商品選項
+								    <%= f.check_box :is_multi_option %>
+								    <span class="lever"></span>
+								    有商品選項
+								  </label>
+								</div>
+								<div class="hr margin-m"></div>
+			    		</div>
+			    		<div class="clear-both"></div>
+							<div class="child-products-block hide">
+								<div class="btn-bar align-right">
+									<a class="btn" id="add-child-product-btn">增加商品選項</a>
+								</div>
+								<div class="child-products-block-inner">
+									<div class="col s6">名稱</div>
+									<div class="col s6">庫存</div>
+									<div class="clear-both"></div>
+								</div>
+							</div>
+						</div>
+			    </div>
+			    <div id="attributes" class="col s12 tab-content">
+						<div class="product-attributes-block">
+								<div class="btn-bar align-right">
+									<a class="btn" id="add-product-attribute-btn">增加商品屬性</a>
+								</div>
+						</div>
+						<div class="product-attributes-block-inner">
+							<div class="col s6">屬性名稱</div>
+							<div class="col s6">屬性內容</div>
+							<div class="clear-both"></div>
+						</div>
+			    </div>
+			  </div>
+			  <div class="row">
+			  	<div>
+			  	</div>
+			  </div>
+			</div>
+			<div class="col m4 s12">
+				<div class="dashboard-right-card">
+					<div class="row">
+						<div class="col s12">
+							<h5>發表</h5>
+							<div class="hr"></div>
+						</div>
+						<p class="col s12">可見商品</p>
+						<div class="switch col s12">
+						  <label>
+						    否
+						    <%= f.check_box :visible %>
+						    <span class="lever"></span>
+						    是
+						  </label>
+						</div>
+						<p class="col s12">目前有供應</p>
+						<div class="switch col s12">
+						  <label>
+						    否
+						    <%= f.check_box :available %>
+						    <span class="lever"></span>
+						    是
+						  </label>
+						</div>
+						<div style="clear: both;"></div>
+						<%= f.submit "發表", class:'btn submit-btn' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+	//**********************************************
+	//
+	// 事件
+	//**********************************************
+
+
+		var child_product_item = '<div class="child-product-item"><input class="child-product-name col s6" placeholder="請輸入子產品名稱" type="text" /><input class="child-product-stock col s6" value="1" type="text" /><a class="child-product-item-delete"><i class="material-icons">close</i></a><div class="clear-both"></div></div>';
+
+		var product_attribute_item = '<div class="product-attribute-item"><input class="product-attribute-name col s6" placeholder="請輸入屬性名稱" type="text" /><input class="product-attribute-value col s6" placeholder="請輸入屬性內容" type="text" /><a class="product-attribute-item-delete"><i class="material-icons">close</i></a><div class="clear-both"></div></div>';
+
+		// 當商品選項切換有無商品選項時的切換
+
+		$('#product_is_multi_option').on('change', function(){
+			if($(this).prop('checked')){
+				$('.child-products-block').removeClass('hide');
+				if($('.child-products-block .child-product-item').length == 0){
+					$('.child-products-block-inner').append(child_product_item);
+				}
+			}else{
+				$('.child-products-block').addClass('hide');
+				$('.child-products-block .child-product-item').remove();
+			}
+		})
+
+		// 當按下增加商品選項時要多出商品選項欄位
+
+		$('#add-child-product-btn').click(function(){
+			$('.child-products-block-inner').append(child_product_item);
+		})
+
+		$('#add-product-attribute-btn').click(function(){
+			$('.product-attributes-block-inner').append(product_attribute_item);
+		})
+
+		$(document).on('click', '.child-product-item-delete', function(){
+			$(this).parent('.child-product-item').remove();
+		})
+
+		// 按下 submit 按鈕時，呼叫打包資料程式獲取資料並且送出
+		$('.submit-btn').click(function(event){
+			$('#preloader-container').addClass('active');
+			event.preventDefault();
+			var dataAll = getProductData();
+			var reqURL = "<%= admin_products_path %>";
+
+		  $.ajax({
+		    url: reqURL,
+		    type : "POST",
+		    data : dataAll,
+		    dataType :"html",
+		    success : function(res){
+		    	var response = $.parseJSON(res);
+		    	var state = response["state"];
+		    	var redirect_url;
+		    	var message = '例外情況發生，請聯絡您的網站管理員';
+		    	$('#preloader-container').removeClass('active');
+
+		    	if(state == 'success'){
+		    		message = '成功創建商品';
+		    		redirect_url = response["redirect_url"];
+		    		window.location.replace(redirect_url);
+		    	}else if (state == 'error'){
+		    		message = response["error"];
+		    		flash.error(message);
+		    	}
+		    },
+		    error: function(res){
+		    	$('#preloader-container').removeClass('active');
+		    	flash.error('網路或是伺服器出錯，請檢查您的網路連線，或是通報您的網站管理員');
+		    }
+		  });
+
+			return false;
+		})
+
+
+
+
+
+	//**********************************************
+	//
+	// 函式庫
+	//**********************************************
+
+		// 按下 submit 時，打包要 post 的資料並回傳
+		function getProductData(){
+			tinymce.triggerSave();
+			var product_name = $('#product_name').val();
+			var product_brand_id = $('#product_brand_id option:selected').val();
+			var product_brief = $('#product_brief').val();
+			var product_description = $('#product_description').val();
+			var product_sku = $('#product_sku').val();
+			var product_list_price = $('#product_list_price').val();
+			var product_sale_price = $('#product_sale_price').val();
+			var product_stock = $('#product_stock').val();
+			var product_weight = $('#product_weight').val();
+			var product_height = $('#product_height').val();
+			var product_length = $('#product_length').val();
+			var product_width = $('#product_width').val();
+			var product_is_multi_option = $('#product_is_multi_option').prop('checked');
+			var product_visible = $('#product_visible').prop('checked');
+			var product_available = $('#product_available').prop('checked');
+			var child_products = [];
+			var product_attributes = [];
+
+			$('.product-attribute-item').each(function(){
+				var name = $(this).find('.product-attribute-name').val();
+				var value = $(this).find('.product-attribute-value').val();
+				var product_attribute = { "name": name, "value": value };
+				product_attributes.push(product_attribute);
+			})
+			product_attributes = JSON.stringify(product_attributes);
+
+			if($('#product_is_multi_option').prop('checked')){
+				$('.child-product-item').each(function(){
+					var name = $(this).find('.child-product-name').val();
+					var stock = $(this).find('.child-product-stock').val();
+					var child_product = { "name": name, "stock": stock };
+					child_products.push(child_product);
+				})
+			}
+			child_products = JSON.stringify(child_products);
+
+
+			var dataAll = {
+				name: product_name,
+				brand_id: product_brand_id,
+				brief: product_brief,
+				description: product_description,
+				sku: product_sku,
+				list_price: product_list_price,
+				sale_price: product_sale_price,
+				stock: product_stock,
+				weight: product_weight,
+				height: product_height,
+				length: product_length,
+				width: product_width,
+				child_products: child_products,
+				product_attributes: product_attributes,
+				is_multi_option: product_is_multi_option,
+				visible: product_visible,
+				available: product_available
+			}
+			return dataAll;
+		}
+</script>
+
 <% end %>

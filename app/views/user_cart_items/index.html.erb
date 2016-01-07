@@ -1,0 +1,37 @@
+<table>
+	<thead>
+		<tr>
+			<th>租書品項</th>
+			<th></th>
+			<th>數量</th>
+			<th>小計</th>
+			<th>刪除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @user_cart_items.each do |user_cart_item| %>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<div class="book-info">
+						<h4>
+							<a href="#">
+								<%= user_cart_item.product.name %>
+							</a>
+						</h4>
+						<h4>
+							<%= 1000 %>
+						</h4>
+					</div>
+				</td>
+				<td><%= user_cart_item.quantity %></td>
+				<td><%= 1000 * user_cart_item.quantity %></td>
+				<td>
+					<%= button_to '刪除' ,user_cart_item_path(user_cart_item), :method => :delete, :class=>'btn btn-danger' , :confirm => "確定要刪除嗎？" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

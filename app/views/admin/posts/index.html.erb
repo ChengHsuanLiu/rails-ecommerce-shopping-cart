@@ -4,6 +4,26 @@
 			<h4>文章總覽</h4>
 			<a href="#" class="btn">新增文章</a>
 
+			<!-- TABLE ACTION BAR -->
+			<div class="admin-table-action-bar row no-margin-bottom">
+				<div class="state-select-block col m6 s12">
+					<ul>
+						<li><a id="post-all">全部</a></li>
+						/
+						<li><a id="post-state-deleted">回收桶</a></li>
+					</ul>
+				</div>
+				<div class="search-box search-box--right col m6 s12">
+					<% if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined' %>
+						<input value="<%= params[:keyword] %>" class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
+					<% else %>
+						<input class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
+					<% end %>
+					<a class="btn search-box-submit" id="search-box-submit">搜尋文章</a>
+				</div>
+			</div>
+			<!-- TABLE ACTION BAR END -->
+
 			<div class="admin-table-container">
 	      <table>
 	        <thead>

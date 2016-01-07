@@ -1,9 +1,9 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.float :total
-      t.float :shipping_fee
-      t.float :subtotal
+      t.float :total, :default => 0
+      t.float :shipping_fee, :default => 0
+      t.float :subtotal, :default => 0
       t.string :shipping_address
       t.string :bill_address
       t.string :shipping_phone

@@ -14,12 +14,13 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
 
+  post 'admin/products/create_child_product' => 'admin/products#create_child_product'
+  post 'admin/products/delete_child_product' => 'admin/products#delete_child_product'
+  post 'admin/products/create_attribute' => 'admin/products#create_attribute'
+  post 'admin/products/delete_attribute' => 'admin/products#delete_attribute'
+
   namespace :admin do
-    resources :products do
-      resources :product_variations do
-        resources :product_variation_values
-      end
-    end
+    resources :products
     resources :brands
     resources :orders
     resources :posts do
@@ -31,9 +32,6 @@ Rails.application.routes.draw do
   resources :products do
     resources :product_attributes
     resources :product_comments
-    resources :product_variations do
-      resources :product_variation_values
-    end
   end
 
   resources :user_cart_items

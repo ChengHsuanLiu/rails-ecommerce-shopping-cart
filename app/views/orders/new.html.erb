@@ -1,0 +1,57 @@
+<%= form_for @order, :html => {:class => 'form-horizontal form'} do |f| %>
+  <div class="flash-messages-container">
+    <% if @order.errors.any? %>
+      <div class="alert alert-dismissible alert-danger">
+        <button class="close" type="button" data-dismiss="alert">×</button>
+        <h3>Error</h3>
+        <% @order.errors.full_messages.each do |msg| %>
+          <strong><%= msg %> || </strong>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <fieldset>
+      <div class="row">
+        <%= f.label :shipping_address, '配送地址', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :shipping_address, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.label :shipping_phone, '配送聯絡電話', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :shipping_phone, :class => 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= f.label :shipping_name, '收件人姓名', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :shipping_name, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.label :bill_address, '帳單地址', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :bill_address, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.label :bill_phone, '帳單聯絡電話', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :bill_phone, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.label :bill_name, '帳單姓名', :class => 'col m2 s12' %>
+        <div class="col m10 s12">
+          <%= f.text_field :bill_name, :class => 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-10.col-lg-offset-2">
+          <a class="btn btn-default" style="margin-right: 8px;" href="<%= user_cart_items_path %>">取消</a>
+          <%= f.submit '送出', :class => 'btn btn-primary' %>
+      </div>
+  </fieldset>
+<% end %>

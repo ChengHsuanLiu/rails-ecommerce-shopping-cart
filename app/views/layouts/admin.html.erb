@@ -2,17 +2,22 @@
 <html>
 <head>
   <title>RailseCommerceShoppingCart</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', 'admin' %>
+  <%= javascript_include_tag 'admin' %>
   <%= csrf_meta_tags %>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 <body>
+	<%= render('partials/preloader') %>
 	<%= render('partials/admin_navbar') %>
+	<%= render('partials/flash_messages') %>
 	<div class="wrapper">
 		<%= render('partials/admin_sidemenu') %>
 		<div class="admin-body--right">
-			<%= yield %>
+			<div class="admin-body-inner">
+				<%= yield %>
+			</div>
 		</div>
 	</div>
 </body>

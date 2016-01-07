@@ -1,11 +1,53 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col s12">
-			<h4>商品總覽</h4>
-			<a href="#" class="btn">新增商品</a>
+			<h4 class="admin-page-title">商品總覽</h4>
+			<a href="<%= new_admin_product_path %>" class="btn">新增商品</a>
+
+
+			<!-- TABLE ACTION BAR -->
+			<div class="admin-table-action-bar row no-margin-bottom">
+				<div class="state-select-block col m6 s12 no-padding">
+					<ul>
+						<li><a id="product-all">全部</a></li>
+						/
+						<li><a id="product-state-deleted">回收桶</a></li>
+						/
+						<li><a id="product-state-no-stock">已缺貨</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- TABLE ACTION BAR END -->
 
 			<div class="admin-table-container">
-	      <table>
+				<div class="row">
+					<div class="col m8 s12 no-padding">
+						<select class="browser-default admin-table-select">
+					    <option value="" disabled selected>選擇品牌</option>
+					    <option value="1">Option 1</option>
+					    <option value="2">Option 2</option>
+					    <option value="3">Option 3</option>
+					  </select>
+						<select class="browser-default admin-table-select">
+					    <option value="" disabled selected>選擇分類</option>
+					    <option value="1">Option 1</option>
+					    <option value="2">Option 2</option>
+					    <option value="3">Option 3</option>
+					  </select>
+						<div class="search-box search-box--right">
+							<% if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined' %>
+								<input value="<%= params[:keyword] %>" class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
+							<% else %>
+								<input class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
+							<% end %>
+							<a class="btn search-box-submit" id="search-box-submit">搜尋商品</a>
+						</div>
+					</div>
+					<div class="col m4 s12 no-padding">
+						<%= paginate @products %>
+					</div>
+				</div>
+	      <table class="admin-table">
 	        <thead>
 	          <tr>
 	              <th data-field="name">名稱</th>
@@ -13,6 +55,7 @@
 	              <th data-field="price">價格</th>
 	              <th data-field="brand">品牌</th>
 	              <th data-field="updated_at">日期</th>
+	              <th data-field="actions">操作</th>
 	          </tr>
 	        </thead>
 
@@ -33,12 +76,24 @@
 		            	<% end %>
 		            </td>
 		            <td><%= p.updated_at %></td>
+		            <td>
+		            	<a href="#" class="icon-btn"><i class="material-icons">edit</i>編輯</a>
+		            	<a href="#" class="icon-btn"><i class="material-icons">delete</i>刪除</a>
+		            </td>
 		          </tr>
 	        	<% end %>
 	        </tbody>
 	      </table>
+	      <%= paginate @products %>
 			</div>
 
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$('#search-box-submit').click(function(){
+		var keyword = $('#search-box-input').val();
+		var reqURL = '<%= request.url %>?' + 'keyword=' + keyword ;
+		window.location.href = reqURL;
+	})
+</script>

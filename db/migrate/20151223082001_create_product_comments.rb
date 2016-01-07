@@ -4,7 +4,7 @@ class CreateProductComments < ActiveRecord::Migration
       t.integer :user_id
       t.integer :product_id
       t.text :body
-      t.integer :rating
+      t.integer :rating, :default => 1
 
       t.timestamps null: false
     end

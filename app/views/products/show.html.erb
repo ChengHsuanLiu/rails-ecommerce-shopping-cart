@@ -1,2 +1,45 @@
 <h1>Product Show</h1>
-<%= @product.name %>
+<p><%= @product.name %></p>
+<p><%= @product.sale_price %></p>
+<div>
+	<% if @child_products && @product.is_multi_option %>
+		<select id="child-products-select" class="browser-default">
+			<% @child_products.each do|cp| %>
+				<option value="<%= cp.id %>" stock="<%= cp.stock %>"><%= cp.name %></option>
+			<% end %>
+		</select>
+	<% end %>
+
+	<input id="add-to-cart-quantity" type="number" value="1" min="1" max="50" />
+	<% if @child_products && @product.is_multi_option %>
+		<a id="add-to-cart-btn" multi-option-product="true" class="btn">加入購物車</a>
+	<% else %>
+		<a id="add-to-cart-btn" multi-option-product="fale" class="btn" product-id="<%= @product.id %>">加入購物車</a>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	<% if user_signed_in? %>
+		var current_user_id = parseInt('#{current_user.id}');
+
+		$(document).on('click', '#add-to-cart-btn', function(){
+			<% if @child_products && @product.is_multi_option %>
+				var product_id = parseInt($('#child-products-select option:selected').attr('value'));
+			<% else %>
+				var product_id = parseInt($(this).attr('product-id'));
+			<% end %>
+			var quantity = parseInt($('#add-to-cart-quantity').val());
+
+	    $.post('/user_cart_items', { "user_cart_item[user_id]": current_user_id, "user_cart_item[product_id]": product_id, "user_cart_item[quantity]": quantity}, function(response) {
+				console.log(response);
+				var user_cart_item_count = response.user_cart_item_count;
+				$('#user-cart-items-count').html(user_cart_item_count);
+				flash.success('成功加入購物車');
+	    })
+		})
+	<% else %>
+		$(document).on('click', '#add-to-cart-btn', function(){
+			flash.error('加入購物車前請先登入');
+		})
+	<% end %>
+</script>

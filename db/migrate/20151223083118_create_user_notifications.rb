@@ -4,7 +4,7 @@ class CreateUserNotifications < ActiveRecord::Migration
       t.integer :user_id
       t.text :body
       t.string :url
-      t.boolean :is_read
+      t.boolean :is_read, :default => false
 
       t.timestamps null: false
     end

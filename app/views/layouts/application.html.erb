@@ -8,8 +8,9 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-
-<%= yield %>
+	<%= render('partials/flash_messages') %>
+	<%= render('partials/navbar') %>
+	<%= yield %>
 
 </body>
 </html>

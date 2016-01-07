@@ -8,5 +8,7 @@ class User < ActiveRecord::Base
   has_many :product_comments
   has_many :user_notifications
   has_many :orders
+
   has_many :user_cart_items
+  has_many :products, through: :user_cart_items
 end

@@ -1,8 +1,27 @@
-
-	<p>文章標題</p>
-	<%= f.text_field :title %>
-	<p>文章分類</p>
-	<%= f.collection_select(:post_category_id, PostCategory.all, :id, :name, {}, {:class=> 'browser-default'}) %>
-	<p>內文</p>
-	<%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 %>
-	<%= f.submit "Submit", class:'btn' %>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col m9 s12">
+			<h4>新增文章</h4>
+			<p>文章標題</p>
+			<%= f.text_field :title %>
+			<p>文章分類</p>
+			<%= f.collection_select(:post_category_id, PostCategory.all, :id, :name, {}, {:class=> 'browser-default'}) %>
+			<p>內文</p>
+			<%= f.text_area :body %>
+		</div>
+		<div class="col m3 s12">
+			<div class="dashboard-right-card">
+				<div class="row">
+					<div class="col s12">
+						<h5>發表</h5>
+						<div class="hr"></div>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="col s12">
+						<%= f.submit "發表", class:'btn submit-btn' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
