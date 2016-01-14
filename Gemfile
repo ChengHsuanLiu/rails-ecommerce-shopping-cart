@@ -27,9 +27,14 @@ gem 'materialize-sass'
 gem 'ionicons-rails'
 gem "kaminari"
 gem 'owlcarousel-rails'
-gem 'carrierwave'
-gem "jquery-fileupload-rails"
 
+# Upload Images
+gem 'carrierwave'
+gem 'carrierwave_direct'
+gem 'sidekiq'
+gem "jquery-fileupload-rails"
+gem "fog"
+gem 'rmagick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -43,6 +48,7 @@ gem "jquery-fileupload-rails"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do

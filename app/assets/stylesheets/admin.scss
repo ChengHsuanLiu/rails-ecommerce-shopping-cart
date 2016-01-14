@@ -295,7 +295,7 @@ ul.pagination {
   -webkit-flex-flow: row wrap;
 
 	.image-item{
-		width: 200px;
+		width: calc(25% - 8px);
 		height: 200px;
 		background-size: cover;
 		background-position: center;
