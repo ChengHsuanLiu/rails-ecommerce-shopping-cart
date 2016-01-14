@@ -28,6 +28,9 @@ gem 'ionicons-rails'
 gem "kaminari"
 gem 'owlcarousel-rails'
 gem 'carrierwave'
+gem "jquery-fileupload-rails"
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

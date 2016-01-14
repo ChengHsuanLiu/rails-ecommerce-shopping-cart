@@ -169,6 +169,18 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   }
 }
 
+.invisible{
+	opacity: 0;
+	visibility: hidden;
+}
+
+.inline-block{
+	display: inline-block;
+}
+
+.vertical-align--middle{
+	vertical-align: middle;
+}
 
 //**************************************************
 //--------------------------------------------------
