@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="row">
+		<div class="col m9 s12">
+			<div class="post-list">
+				<% @posts.each do |p| %>
+					<div class="post-item row">
+						<div class="col m4 s12">
+							<%= image_tag('posts/1.png', class:'post-img') %>
+						</div>
+						<div class="col m6 s12">
+							<h4 class="post-title"><a href="<%= post_path(p) %>"><%= p.title %></a></h4>
+							<p class="post-category"><%= p.post_category.name %></p>
+							<p class="post-time"><i class="material-icons inline-icon margin-right">access_time</i><%= p.created_at %></p>
+						</div>
+						<div class="col m2 s12">
+							<a href="<%= post_path(p) %>" class="outline-btn margin-top-m">Read</a>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		<div class="col m3 s12">
+			<%= render('partials/post_sidebar') %>
+		</div>
+	</div>
+</div>

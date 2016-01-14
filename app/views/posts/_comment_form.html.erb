@@ -1,0 +1,20 @@
+<form class="margin-top-m">
+	<h5>Leave a comment：</h5>
+	<%= text_area_tag :body %>
+	<%= submit_tag 'Submit', class: 'flat-btn margin-top-s', id: 'post-comment-submit' %>
+</form>
+<script type="text/javascript">
+	$('#post-comment-submit').click(function(){
+		event.preventDefault();
+		tinymce.triggerSave();
+		var body = $('#body').val();
+
+		var reqURL = '<%= post_post_comments_path(@post) %>' + '?post_id=' + '<%= @post.id %>' + '&body=' + body;
+
+		$.post(reqURL, function(res){
+			flash.success('留言成功');
+		})
+
+		return false;
+	})
+</script>

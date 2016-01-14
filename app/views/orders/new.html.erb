@@ -1,57 +1,64 @@
-<%= form_for @order, :html => {:class => 'form-horizontal form'} do |f| %>
-  <div class="flash-messages-container">
-    <% if @order.errors.any? %>
-      <div class="alert alert-dismissible alert-danger">
-        <button class="close" type="button" data-dismiss="alert">×</button>
-        <h3>Error</h3>
-        <% @order.errors.full_messages.each do |msg| %>
-          <strong><%= msg %> || </strong>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-  <fieldset>
-      <div class="row">
-        <%= f.label :shipping_address, '配送地址', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :shipping_address, :class => 'form-control' %>
+<div class="container margin-top-m">
+  <div class="row">
+    <div class="col m6 s12">
+      <%= render 'partials/shopping_cart_steps', cart_state: 'disabled', data_state: 'active', confirm_state: 'disabled' %>
+      <%= form_for @order, :html => {:class => 'form-horizontal form'} do |f| %>
+        <div class="flash-messages-container">
+          <% if @order.errors.any? %>
+            <div class="alert alert-dismissible alert-danger">
+              <button class="close" type="button" data-dismiss="alert">×</button>
+              <h3>Error</h3>
+              <% @order.errors.full_messages.each do |msg| %>
+                <strong><%= msg %> || </strong>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-      </div>
-      <div class="row">
-        <%= f.label :shipping_phone, '配送聯絡電話', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :shipping_phone, :class => 'form-control' %>
-        </div>
-      </div>
+        <div>
+            <div class="row">
+              <div class="col m6 s12">
+                <p>收件人姓名</p>
+                <%= f.text_field :shipping_name, :class => 'form-control' %>
+              </div>
+              <div class="col m6 s12">
+                <p>配送聯絡電話</p>
+                <%= f.text_field :shipping_phone, :class => 'form-control' %>
+              </div>
+            </div>
 
-      <div class="row">
-        <%= f.label :shipping_name, '收件人姓名', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :shipping_name, :class => 'form-control' %>
+            <div class="row">
+              <div class="col s12">
+                <p>配送地址</p>
+                <%= f.text_field :shipping_address, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col m6 s12">
+                <p>帳單聯絡電話</p>
+                <%= f.text_field :bill_phone, :class => 'form-control' %>
+              </div>
+              <div class="col m6 s12">
+                <p>帳單姓名</p>
+                <%= f.text_field :bill_name, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s12">
+                <p>帳單地址</p>
+                <%= f.text_field :bill_address, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s12">
+                <a class="outline-btn margin-bottom-s margin-top-s margin-right-s default" href="<%= user_cart_items_path %>">取消</a>
+                <%= f.submit '送出', :class => 'flat-btn margin-bottom-s large' %>
+              </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <%= f.label :bill_address, '帳單地址', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :bill_address, :class => 'form-control' %>
-        </div>
-      </div>
-      <div class="row">
-        <%= f.label :bill_phone, '帳單聯絡電話', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :bill_phone, :class => 'form-control' %>
-        </div>
-      </div>
-      <div class="row">
-        <%= f.label :bill_name, '帳單姓名', :class => 'col m2 s12' %>
-        <div class="col m10 s12">
-          <%= f.text_field :bill_name, :class => 'form-control' %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-10.col-lg-offset-2">
-          <a class="btn btn-default" style="margin-right: 8px;" href="<%= user_cart_items_path %>">取消</a>
-          <%= f.submit '送出', :class => 'btn btn-primary' %>
-      </div>
-  </fieldset>
-<% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

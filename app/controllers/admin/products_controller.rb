@@ -155,7 +155,7 @@ class Admin::ProductsController < ApplicationController
     end
 
     respond_to do |format|
-      if @product.save
+      if @product.save!
         flash[:success] = "成功儲存產品"
         format.json { render json:
           {

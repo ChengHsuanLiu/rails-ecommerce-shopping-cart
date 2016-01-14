@@ -1,8 +1,58 @@
-<h1>Product Index</h1>
-<ul>
-	<% @products.each do |product| %>
-		<li>
-			<a href="<%= product_path(product) %>"><%= product.name %></a>
-		</li>
-	<% end %>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="col s12 m3">
+			<%= render('partials/product_sidebar') %>
+		</div>
+		<div class="col s12 m9">
+			<div class="row">
+				<div class="col s12">
+					<div class="owl-carousel margin-top-m">
+					  <div><%= image_tag ('slides/slide_1.jpg') %></div>
+					  <div><%= image_tag ('slides/slide_2.jpg') %></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<h4>Products</h4>
+					<div class="products-block">
+						<% @products.each do |product| %>
+							<div class="product-item">
+								<div class="image-link" href="<%= product_path(product) %>">
+									<%= image_tag('http://cdn.shopify.com/s/files/1/0037/5472/products/0706412401_2_1_1_large.jpg?v=1373476417', class: 'product-img') %>
+									<span class="icon">
+										<i class="material-icons">link</i>
+									</span>
+									<a class="flat-btn product-quick-view-btn" href="#">QUICK VIEW</a>
+									<div class="hover-cover"></div>
+								</div>
+								<h5 class="product-name"><a href="<%= product_path(product) %>"><%= product.name %></a></h5>
+								<p class="list-price"><%= product.list_price %></p>
+								<p class="sale-price"><%= product.sale_price %></p>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).on('click', '.image-link', function(){
+		var linkURL = $(this).attr('href');
+		window.location.replace(linkURL);
+	})
+
+	$(document).on('click', '.product-quick-view-btn', function(){
+		return false;
+	})
+
+	$(".owl-carousel").owlCarousel({
+		loop:true,
+		items:1,
+		autoPlay:true,
+		slideSpeed:1000,
+		pagination: false
+	});
+</script>

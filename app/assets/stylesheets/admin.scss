@@ -1,6 +1,97 @@
+//**************************************************
+//--------------------------------------------------
+// Rails Commerce Shopping Cart
+// Author: Lucas Liu
+// Author Site: chenghsuan.com
+// Author Email: chenghsuango@gmail.com
+//--------------------------------------------------
+//**************************************************
+
+
+//**************************************************
+//--------------------------------------------------
+// Comment Level1 Title
+//--------------------------------------------------
+//**************************************************
+
+
+//--------------------------------------------------
+// Comment Level2 Title
+//--------------------------------------------------
+
+// Comment Level3 Title
+
+//**************************************************
+//--------------------------------------------------
+// 1. Import
+//--------------------------------------------------
+//**************************************************
+
+//**************************************************
+//--------------------------------------------------
+// 2. Global
+//--------------------------------------------------
+//**************************************************
+
 body{
 	background-color: #F5F5F5;
 }
+
+.admin-body--right{
+	margin-left: 180px;
+	margin-right: auto;
+	padding-top: 48px;
+}
+
+.admin-body-inner{
+	padding: 24px;
+}
+
+.dashboard-right-card{
+	margin-top: 24px;
+	padding: 12px;
+	background-color: #FFF;
+
+	.btn{
+		margin-top: 24px !important;
+	}
+}
+
+
+//**************************************************
+//--------------------------------------------------
+// 3. Tools
+//--------------------------------------------------
+//**************************************************
+
+.admin-page-title{
+  display: inline-block;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.no-margin-bottom{
+	margin-bottom: 0;
+}
+
+
+//**************************************************
+//--------------------------------------------------
+// 4. Components
+//--------------------------------------------------
+//**************************************************
+
+//--------------------------------------------------
+// Navbar
+//--------------------------------------------------
+
+.fixed-nav{
+	top: 0;
+}
+
+//--------------------------------------------------
+// Side Menu
+//--------------------------------------------------
 
 .side-menu{
 	position: fixed;
@@ -18,14 +109,7 @@ body{
 	}
 
 }
-.admin-body--right{
-	margin-left: 180px;
-	margin-right: auto;
-	padding-top: 48px;
-}
-.admin-body-inner{
-	padding: 24px;
-}
+
 .side-menu{
 	.collapsible{
 		border-right: none;
@@ -62,15 +146,9 @@ body{
 	}
 }
 
-.dashboard-right-card{
-	margin-top: 24px;
-	padding: 12px;
-	background-color: #FFF;
-
-	.btn{
-		margin-top: 24px !important;
-	}
-}
+//--------------------------------------------------
+// Tabs
+//--------------------------------------------------
 
 .tabs{
 	li{
@@ -82,6 +160,11 @@ body{
 		}
 	}
 }
+
+//--------------------------------------------------
+// Product
+//--------------------------------------------------
+
 .child-product-item{
 	padding-right: 40px;
 	position: relative;
@@ -104,11 +187,10 @@ body{
 		cursor: pointer;
 	}
 }
-.admin-page-title{
-  display: inline-block;
-  margin-right: 12px;
-  vertical-align: middle;
-}
+
+//--------------------------------------------------
+// Product
+//--------------------------------------------------
 
 .state-select-block{
 	ul{
@@ -119,47 +201,8 @@ body{
 	}
 }
 
-.pagination li {
-  display: inline-block;
-  font-size: 12px;
-  padding: 0 8px;
-  line-height: 24px;
-  border-radius: 2px;
-  text-align: center;
-
-  i {
-    font-size: 20px;
-  }
-}
-
-ul.pagination {
-  text-align: right;
-  margin-top: 0px;
-  padding: 8px 0;
-  border-radius: 2px;
-  margin-bottom: 0;
-}
-
-.admin-table{
-	background: #FFF;
-  border: 1px solid #D0D0D0;
-  margin-bottom: 8px;
-
-}
-
-.admin-table-select{
-	height: 2.4rem;
-	max-width: 150px;
-	display: inline-block !important;
-  margin: 0 2px;
-}
-
-.no-margin-bottom{
-	margin-bottom: 0;
-}
 
 .product-attribute-item{
-
 	position: relative;
   padding-right: 40px;
   margin: 8px 0;
@@ -192,3 +235,47 @@ ul.pagination {
 		cursor: pointer;
 	}
 }
+
+//--------------------------------------------------
+// Pagination
+//--------------------------------------------------
+
+.pagination li {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 8px;
+  line-height: 24px;
+  border-radius: 2px;
+  text-align: center;
+
+  i {
+    font-size: 20px;
+  }
+}
+
+ul.pagination {
+  text-align: right;
+  margin-top: 0px;
+  padding: 8px 0;
+  border-radius: 2px;
+  margin-bottom: 0;
+}
+
+//--------------------------------------------------
+// Table
+//--------------------------------------------------
+
+.admin-table{
+	background: #FFF;
+  border: 1px solid #D0D0D0;
+  margin-bottom: 8px;
+
+}
+
+.admin-table-select{
+	height: 2.4rem;
+	max-width: 150px;
+	display: inline-block !important;
+  margin: 0 2px;
+}
+

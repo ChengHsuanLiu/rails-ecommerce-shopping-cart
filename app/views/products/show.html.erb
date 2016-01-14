@@ -1,21 +1,56 @@
-<h1>Product Show</h1>
-<p><%= @product.name %></p>
-<p><%= @product.sale_price %></p>
-<div>
-	<% if @child_products && @product.is_multi_option %>
-		<select id="child-products-select" class="browser-default">
-			<% @child_products.each do|cp| %>
-				<option value="<%= cp.id %>" stock="<%= cp.stock %>"><%= cp.name %></option>
-			<% end %>
-		</select>
-	<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col m3 s12">
+			<%= render('partials/product_sidebar') %>
+		</div>
+		<div class="col m9 s12">
+			<div class="row product-show">
+				<div class="col m6 s12">
+					<div class="product-image">
+						<%= image_tag ('http://cdn.shopify.com/s/files/1/0037/5472/products/0706412401_2_1_1_large.jpg?v=1373476417') %>
+					</div>
+				</div>
+				<div class="col m6 s12">
+					<h4 class="product-name"><%= @product.name %></h4>
+					<h6 class="product-list-price"><del><%= @product.list_price %></del></h6>
+					<h5 class="product-sale-price"><%= @product.sale_price %></h5>
+					<div class="hr margin-m"></div>
+					<div class="product-actions">
+						<% if @child_products && @product.is_multi_option %>
+							<select id="child-products-select" class="browser-default">
+								<% @child_products.each do|cp| %>
+									<option value="<%= cp.id %>" stock="<%= cp.stock %>"><%= cp.name %></option>
+								<% end %>
+							</select>
+						<% end %>
 
-	<input id="add-to-cart-quantity" type="number" value="1" min="1" max="50" />
-	<% if @child_products && @product.is_multi_option %>
-		<a id="add-to-cart-btn" multi-option-product="true" class="btn">加入購物車</a>
-	<% else %>
-		<a id="add-to-cart-btn" multi-option-product="fale" class="btn" product-id="<%= @product.id %>">加入購物車</a>
-	<% end %>
+						<input id="add-to-cart-quantity" type="number" value="1" min="1" max="50" />
+						<% if @child_products && @product.is_multi_option %>
+							<a id="add-to-cart-btn" multi-option-product="true" class="outline-btn">加入購物車</a>
+						<% else %>
+							<a id="add-to-cart-btn" multi-option-product="fale" class="outline-btn" product-id="<%= @product.id %>">加入購物車</a>
+						<% end %>
+					</div>
+				</div>
+				<div class="col s12">
+					<div class="row" style="margin-top: 40px;">
+				    <div class="col s12">
+				      <ul class="tabs">
+				        <li class="tab col s3"><a class="active" href="#product-description">詳細資訊</a></li>
+				        <li class="tab col s3"><a href="#product-comments">留言板</a></li>
+				      </ul>
+				    </div>
+				    <div id="product-description" class="col s12 tab-content">
+							<%= @product.description.html_safe %>
+				    </div>
+				    <div id="product-comments" class="col s12 tab-content">
+				    	<%= render('comments') %>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">

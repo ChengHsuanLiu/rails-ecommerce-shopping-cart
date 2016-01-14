@@ -1,0 +1,14 @@
+<h5>Comments</h5>
+<% @product_comments.each do |pc| %>
+	<div class="comment">
+		<p><small><%= pc.created_at %></small></p>
+		<div class="comment-rating">
+			<%= pc.rating %>
+		</div>
+		<div class="comment-body">
+			<%= pc.body.html_safe %>
+		</div>
+	</div>
+<% end %>
+<%= render('comment_form') %>
+

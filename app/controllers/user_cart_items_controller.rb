@@ -12,7 +12,7 @@ class UserCartItemsController < ApplicationController
 			@quantity_total = @quantity_total + item.quantity
 		end
 
-		@total_amount = @subtotal
+		@total = @subtotal
 		@user_cart_items = current_user.user_cart_items
 	end
 
@@ -50,6 +50,34 @@ class UserCartItemsController < ApplicationController
 	      end
 	    end
 	  end
+  end
+
+  def update_all
+  	@user = current_user
+  	user_cart_items = ActiveSupport::JSON.decode(params[:user_cart_items]) if params[:user_cart_items].present?
+  	user_cart_items.each do |item|
+  		@user_cart_item = @user.user_cart_items.find_by(id: item["id"].to_i)
+  		@user_cart_item.update({ quantity: item["quantity"].to_i })
+  	end
+
+    respond_to do |format|
+      if @user.save!
+      	flash[:success] = '成功更新購物車'
+        format.json { render json:
+          {
+            state: 'success',
+            redirect_url: user_cart_items_path
+          }
+        }
+    	else
+        format.json { render json:
+          {
+            state: 'error',
+            error: @user.errors.full_messages
+          }
+        }
+    	end
+    end
   end
 
   def destroy

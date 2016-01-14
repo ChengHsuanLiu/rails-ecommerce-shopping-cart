@@ -1,0 +1,16 @@
+
+<div class="product-side-bar sidebar">
+	<p>SHOP FOR</p>
+	<div class="hr"></div>
+	<ul>
+	</ul>
+	<p>SHOP BY BRAND</p>
+	<div class="hr"></div>
+	<ul>
+		<% @brands.each do |b| %>
+			<li><a href="#"><%= b.name %></a></li>
+		<% end %>
+	</ul>
+	<p>SPECIAL OFFER</p>
+	<div class="hr"></div>
+</div>

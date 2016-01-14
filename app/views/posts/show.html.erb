@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+		<div class="col m9 s12">
+			<div class="post-show">
+				<div class="row">
+					<div class="col m3 s12">
+						<%= image_tag('posts/1.png', class:'post-img') %>
+					</div>
+					<div class="col m6 s12">
+						<h4 class="post-title"><a href="<%= post_path(@post) %>"><%= @post.title %></a></h4>
+						<p class="post-category"><%= @post.post_category.name %></p>
+						<p class="post-time"><i class="material-icons inline-icon margin-right">access_time</i><%= @post.created_at %></p>
+					</div>
+					<div class="col s12">
+						<div class="hr margin-top-s margin-bottom-s"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+						<%= @post.body.html_safe %>
+					</div>
+					<div class="col s12">
+						<div class="hr margin-top-s margin-bottom-s"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+				    <div id="post-comments">
+				    	<%= render('comments') %>
+				    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col m3 s12">
+			<%= render('partials/post_sidebar') %>
+		</div>
+	</div>
+</div>

@@ -1,9 +1,9 @@
 /*** Colors ***/
-$primary-color: #7B96A5 !default;
+$primary-color: #7CB9B1 !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
-$secondary-color: #F6BF59 !default;
+$secondary-color: #F3B0B3 !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("light-blue", "darken-1") !default;
@@ -52,8 +52,8 @@ $dropdown-color: $secondary-color !default;
 $dropdown-item-height: 50px !default;
 
 /*** Fonts ***/
-$roboto-font-path: "roboto/" !default;
-$icons-font-path: "material-design-icons/" !default;
+$roboto-font-path: "../assets/roboto/" !default;
+$icons-font-path: "../assets/material-design-icons/" !default;
 
 /*** Forms ***/
 // Text Inputs + Textarea
@@ -101,12 +101,14 @@ $element-bottom-margin: ($gutter-width*2)/3 !default;
 /*** Navbar ***/
 $navbar-height: 48px !default;
 $navbar-height-mobile: 48px !default;
-$navbar-font-color: #606060 !default;
+$navbar-font-color: #666666 !default;
 $navbar-brand-font-size: 2.1rem !default;
+$nav-background-color: #ffffff !default;
 
 /*** SideNav ***/
 $sidenav-bg-color: #fff !default;
 $sidenav-padding-right: 15px !default;
+$sidenav-item-height: 64px !default;
 
 /*** Photo Slider ***/
 $slider-bg-color: color('grey', 'base') !default;
@@ -131,7 +133,7 @@ $toast-color: #323232 !default;
 $toast-text-color: #fff !default;
 
 /*** Typography ***/
-$off-black: rgb(87, 90, 99) !default;
+$off-black: rgba(0, 0, 0, 0.87) !default;
 // Header Styles
 $h1-fontsize: 4.2rem !default;
 $h2-fontsize: 3.56rem !default;

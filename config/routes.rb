@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   resources :user_cart_items
+  post 'user_cart_items/update_all' => 'user_cart_items#update_all'
   resources :user_notifications
   resources :post_categories
   resources :posts do

@@ -1,0 +1,23 @@
+<form>
+	<p>評分</p>
+	<%= number_field_tag :rating, '3', max: 5, min: 1 %>
+	<p>評價內容</p>
+	<%= text_area_tag :body %>
+	<%= submit_tag 'Submit', class: 'flat-btn margin-top-s', id: 'product-comment-submit' %>
+</form>
+<script type="text/javascript">
+	$('#product-comment-submit').click(function(){
+		event.preventDefault();
+		tinymce.triggerSave();
+		var rating = $('#rating').val();
+		var body = $('#body').val();
+
+		var reqURL = '<%= product_product_comments_path(@product) %>' + '?product_id=' + '<%= @product.id %>' + '&body=' + body + '&rating=' + rating;
+
+		$.post(reqURL, function(res){
+			flash.success('留言成功');
+		})
+
+		return false;
+	})
+</script>

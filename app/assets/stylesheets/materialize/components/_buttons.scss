@@ -43,13 +43,13 @@
   background-color: $button-color;
   text-align: center;
   letter-spacing: .5px;
-  @extend .z-depth-1;
-  @include transition(.2s ease-out);
+  //@extend .z-depth-1;
+  transition: .2s ease-out;
   cursor: pointer;
 
   &:hover {
     background-color: lighten($button-color, 5%);
-    @extend .z-depth-1-half;
+    //@extend .z-depth-1-half;
   }
 }
 
@@ -81,6 +81,7 @@
   }
 
   &:hover {
+    background-color: $button-color;
     @extend .z-depth-1-half;
   }
   &:before {
@@ -177,20 +178,4 @@ button.btn-floating {
 // Block button
 .btn-block {
   display: block;
-}
-
-.btn-outline{
-  background-color: #FFF;
-  border: 1px #606060 solid;
-  padding: 0 2rem;
-  text-align: center;
-  letter-spacing: .5px;
-  display: inline-block;
-  height: $button-height;
-  line-height: $button-line-height;
-  // margin-bottom: 15px;
-  outline: 0;
-  color: #606060;
-  border-radius: 2px;
-  cursor: pointer;
 }

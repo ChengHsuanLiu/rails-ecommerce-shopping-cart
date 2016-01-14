@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RailseCommerceShoppingCart</title>
+  <title><%= @product && @product.name || 'Rails Ecommerce App' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script>tinymce.init({ selector:'textarea' });</script>
 </head>
-<body>
+<body style="padding-top: 80px;">
 	<%= render('partials/flash_messages') %>
 	<%= render('partials/navbar') %>
-	<%= yield %>
-
+	<div id="wrapper">
+		<%= yield %>
+	</div>
+	<%= render('partials/subscribe_newsletter_block') %>
+	<%= render('partials/footer') %>
 </body>
 </html>

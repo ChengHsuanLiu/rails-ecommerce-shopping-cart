@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require materialize-sprockets
+//= require_tree ./materialize
 //= require vendor/toast
+//= require tinymce/tinymce.min
+//= require owl.carousel

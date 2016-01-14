@@ -41,6 +41,8 @@ class OrdersController < ApplicationController
 			quantity_total = quantity_total + item.quantity
 		end
 
+		@order.total = @order.subtotal + @order.shipping_fee
+
 		if @order.save
 			current_user.user_cart_items.each do |item|
 				@product = Product.find(item.product_id)

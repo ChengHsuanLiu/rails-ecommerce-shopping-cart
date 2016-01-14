@@ -1,0 +1,18 @@
+
+<div class="post-side-bar sidebar">
+	<p>RECENT POSTS</p>
+	<div class="hr"></div>
+	<ul>
+		<% @recent_posts.each do |rp| %>
+			<li><a href="<%= post_path(rp) %>"><%= rp.title %></a></li>
+		<% end %>
+	</ul>
+	<p>CATEGORIES</p>
+	<div class="hr"></div>
+	<ul>
+		<% @post_categories.each do |pc| %>
+			<li><a href="#"><%= pc.name %></a></li>
+		<% end %>
+	</ul>
+</div>
+

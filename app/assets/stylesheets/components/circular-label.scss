@@ -1,0 +1,65 @@
+.circular-label {
+    overflow: hidden;
+    z-index: 100;
+    vertical-align: middle;
+    font-size: 11px;
+    -webkit-box-shadow:0 3px 3px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:0 3px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    background: $primary-color;
+    color: #64716F;
+}
+.label-inner {
+    width: 85%;
+    height: 85%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px dotted white;
+    vertical-align: middle;
+    margin: auto;
+    top: 5%;
+    position: relative;
+    overflow: hidden;
+}
+.label-inner > span {
+    display: table;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    margin-top: 38%;
+    font-family:'ProximaNovaLtSemibold';
+    font-size: 15px;
+    line-height: 1.0em;
+}
+.circular-label.label-size-large {
+    width: 110px;
+    height: 110px;
+    -moz-border-radius: 55px;
+    -webkit-border-radius: 55px;
+    border-radius: 55px;
+    //margin-top:-55px;
+}
+.circular-label.label-size-med {
+    width: 76px;
+    height: 76px;
+    -moz-border-radius: 38px;
+    -webkit-border-radius: 38px;
+    border-radius: 38px;
+    //margin-top:-38px;
+}
+.circular-label.label-size-med .label-inner > span {
+    margin-top: 33%;
+}
+.circular-label.label-size-small {
+    width: 66px;
+    height: 66px;
+    -moz-border-radius: 33px;
+    -webkit-border-radius: 33px;
+    border-radius: 33px;
+    //margin-top:-33px;
+}
