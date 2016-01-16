@@ -10,6 +10,8 @@ class Admin::ProductsController < ApplicationController
 
   def new
   	@product = Product.new
+    @image = Image.new
+    @images = Image.all
   end
 
   def create
@@ -29,6 +31,7 @@ class Admin::ProductsController < ApplicationController
     @product.height = params[:height].to_f
     @product.length = params[:length].to_f
     @product.width = params[:width].to_f
+    @product.feature_image_id = params[:feature_image_id].to_i
 
     product_attributes = ActiveSupport::JSON.decode(params[:product_attributes])
     product_attributes.each do |pa|
@@ -41,7 +44,7 @@ class Admin::ProductsController < ApplicationController
         brand_id: @product.brand_id, brief: @product.brief, description: @product.description,
         sku: @product.sku, list_price: @product.list_price, sale_price: @product.sale_price,
         stock: cp["stock"].to_i , weight: @product.weight, height: @product.height, length: @product.length,
-        width: @product.width, is_child_product: true, visible: @product.visible, available: @product.available  })
+        width: @product.width, is_child_product: true, visible: @product.visible, available: @product.available, feature_image_id: @product.feature_image_id  })
     end
 
     respond_to do |format|
@@ -66,8 +69,11 @@ class Admin::ProductsController < ApplicationController
 
   def edit
   	@product = Product.find(params[:id])
+    @feature_image_url = Image.find(@product.feature_image_id).image_url if @product.feature_image_id
     @child_products = @product.child_products
     @product_attributes = @product.product_attributes
+    @image = Image.new
+    @images = Image.all
   end
 
   def create_child_product
@@ -96,7 +102,26 @@ class Admin::ProductsController < ApplicationController
   end
 
   def delete_child_product
+    product_id = params[:cp_id].to_i if params[:cp_id].present?
+    @product = Product.find(product_id)
 
+    respond_to do |format|
+      if @product.destroy
+        format.json { render json:
+          {
+            state: 'success',
+            product: @product
+          }
+        }
+      else
+        format.json { render json:
+          {
+            state: 'error',
+            error: @product.errors.full_messages
+          }
+        }
+      end
+    end
   end
 
   def create_attribute
@@ -142,7 +167,7 @@ class Admin::ProductsController < ApplicationController
     @product.update({ name: params[:name].to_s, brand_id: params[:brand_id].to_i, brief: params[:brief], description: params[:description], is_multi_option: params[:is_multi_option],
         sku: params[:sku].to_s, list_price: params[:list_price].to_f, sale_price: params[:sale_price].to_f,
         stock: params[:stock].to_i , weight: params[:weight].to_f, height: params[:height].to_f, length: params[:length].to_f,
-        width: params[:width].to_f, is_child_product: true, visible: params[:visible], available: params[:available]  })
+        width: params[:width].to_f, is_child_product: true, visible: params[:visible], available: params[:available], feature_image_id: params[:feature_image_id]  })
 
     product_attributes = ActiveSupport::JSON.decode(params[:product_attributes])
     product_attributes.each do |pa|
@@ -190,6 +215,6 @@ class Admin::ProductsController < ApplicationController
   private
 
   def products_params
-    params.require(:product).permit(:name, :brief, :description, :list_price, :sale_price, :stock, :sku, :weight, :height, :length, :width, :is_multi_option, :visible, :available, :brand_id, :is_child_product, :parent_product_id)
+    params.require(:product).permit(:name, :brief, :description, :list_price, :sale_price, :stock, :sku, :weight, :height, :length, :width, :is_multi_option, :visible, :available, :brand_id, :is_child_product, :parent_product_id, :feature_image_id)
   end
 end

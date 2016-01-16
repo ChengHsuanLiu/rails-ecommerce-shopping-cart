@@ -156,12 +156,23 @@
 						<%= f.submit "儲存&發表", class:'btn submit-btn' %>
 					</div>
 				</div>
+				<div class="dashboard-right-card">
+					<h5>特色圖片</h5>
+					<div class="hr margin-bottom-s"></div>
+					<a class="image-selector-trigger" target="product_feature_image_id">選擇特色圖片</a>
+					<%= f.text_field :feature_image_id, class: 'hide' %>
+					<div class="feature-image-block" id="feature-image-block">
+						<% if @feature_image_url %>
+							<%= image_tag(@feature_image_url) %>
+						<% end %>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+<% end %>
 
-
-
+<%= render ('partials/image_selector') %>
 
 <script type="text/javascript">
 
@@ -183,6 +194,7 @@
 			var child_product_item = '<div class="child-product-item" cp-id="' + child_product.id + '"><input class="child-product-name col s6" placeholder="請輸入子產品名稱" type="text" value="' + child_product.name + '" /><input class="child-product-stock col s6" value="' + child_product.stock + '" type="text" /><a class="child-product-item-delete" cp-id="' + child_product.id + '"><i class="material-icons">close</i></a><div class="clear-both"></div></div>';
 
 			$('.child-products-block-inner').append(child_product_item);
+			flash.success('成功新增產品變化');
 		})
 	})
 
@@ -193,9 +205,9 @@
 		var reqURL = '<%= admin_products_delete_child_product_path %>' + '?cp_id=' + child_product_id;
 
 		$.post(reqURL, function(res){
-			console.log(res);
-			flash.success('成功刪除產品屬性');
-		})
+			$(this).parent('.child-product-item').remove();
+			flash.success('成功刪除產品變化');
+		}.bind(this))
 	})
 
 	// 增加產品屬性
@@ -222,6 +234,16 @@
 			$(this).parent('.product-attribute-item').remove();
 			flash.success('成功刪除產品屬性');
 		}.bind(this))
+	})
+
+	$(document).on('change', '#product_feature_image_id', function(){
+		var image_id = $(this).val();
+		var reqURL = '<%= admin_images_get_image_url_path %>' + '?image_id=' + image_id;
+		console.log(reqURL);
+		$.get(reqURL, function(res){
+			var image_url = res["image_url"];
+			$('#feature-image-block').html('<img src="' + image_url + '" />');
+		})
 	})
 
 
@@ -284,6 +306,7 @@
 			var product_length = $('#product_length').val();
 			var product_width = $('#product_width').val();
 			var product_is_multi_option = $('#product_is_multi_option').prop('checked');
+			var product_feature_image_id = $('#product_feature_image_id').val();
 			var product_visible = $('#product_visible').prop('checked');
 			var product_available = $('#product_available').prop('checked');
 			var child_products = [];
@@ -326,10 +349,11 @@
 				product_attributes: product_attributes,
 				is_multi_option: product_is_multi_option,
 				visible: product_visible,
-				available: product_available
+				available: product_available,
+				feature_image_id: product_feature_image_id
 			}
 			return dataAll;
 		}
 </script>
 
-<% end %>
+

@@ -144,10 +144,20 @@
 						<%= f.submit "發表", class:'btn submit-btn' %>
 					</div>
 				</div>
+				<div class="dashboard-right-card">
+					<h5>特色圖片</h5>
+					<div class="hr margin-bottom-s"></div>
+					<a class="image-selector-trigger" target="product_feature_image_id">選擇特色圖片</a>
+					<%= f.text_field :feature_image_id, class: 'hide' %>
+					<div class="feature-image-block" id="feature-image-block">
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
+<% end %>
+<%= render ('partials/image_selector') %>
 <script type="text/javascript">
 
 	//**********************************************
@@ -225,6 +235,16 @@
 			return false;
 		})
 
+		$(document).on('change', '#product_feature_image_id', function(){
+			var image_id = $(this).val();
+			var reqURL = '<%= admin_images_get_image_url_path %>' + '?image_id=' + image_id;
+			console.log(reqURL);
+			$.get(reqURL, function(res){
+				var image_url = res["image_url"];
+				$('#feature-image-block').html('<img src="' + image_url + '" />');
+			})
+		})
+
 
 
 
@@ -249,6 +269,7 @@
 			var product_height = $('#product_height').val();
 			var product_length = $('#product_length').val();
 			var product_width = $('#product_width').val();
+			var product_feature_image_id = $('#product_feature_image_id').val();
 			var product_is_multi_option = $('#product_is_multi_option').prop('checked');
 			var product_visible = $('#product_visible').prop('checked');
 			var product_available = $('#product_available').prop('checked');
@@ -291,10 +312,10 @@
 				product_attributes: product_attributes,
 				is_multi_option: product_is_multi_option,
 				visible: product_visible,
-				available: product_available
+				available: product_available,
+				feature_image_id: product_feature_image_id
 			}
 			return dataAll;
 		}
 </script>
 
-<% end %>

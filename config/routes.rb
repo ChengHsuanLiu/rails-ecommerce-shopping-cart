@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   post 'admin/products/create_attribute' => 'admin/products#create_attribute'
   post 'admin/products/delete_attribute' => 'admin/products#delete_attribute'
 
+  get 'admin/images/get_image_url' => 'admin/images#get_image_url'
+
   namespace :admin do
     resources :products
     resources :brands

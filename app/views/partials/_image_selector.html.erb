@@ -1,36 +1,83 @@
-<div class="container-fluid">
-	<div class="image-form row">
-		<%= form_for @image, :url => admin_images_path do |f| %>
-			<div class="col s12">
-				<h4 class="inline-block vertical-align--middle margin-right-s">圖片庫</h4>
-				<a class="outline-btn default vertical-align--middle" id="dropzone-trigger">Upload</a>
-				<div id="dropzone-container">
-					<div id="dropzone" class="fade well">
-						<h5>請將檔案拖曳到這上傳</h5>
-						<p>或</p>
-						<div class="fileUpload flat-btn">
-					    <span>選擇檔案</span>
-					    <%= f.file_field :image, multiple: true, name: 'image[image]', class: 'upload' %>
-						</div>
-						<p>最大上傳檔案大小：1 MB。</p>
+<div class="image-selector-cover" id="image-selector-cover"></div>
+<div id="image-selector" class="image-selector">
+	<a id="close-image-selector"><i class="material-icons">close</i></a>
+	<%= form_for @image, :url => admin_images_path do |f| %>
+		<div class="tool-bar">
+			<h5 class="inline-block vertical-align--middle">設定圖片</h5>
+      <ul class="tabs">
+        <li class="tab"><a class="active" href="#upload-tab-content">上傳檔案</a></li>
+        <li class="tab"><a href="#image-list-tab-content">圖片庫</a></li>
+      </ul>
+		</div>
+		<div id="upload-tab-content" class="upload-tab-content">
+			<!--<a class="outline-btn default vertical-align--middle" id="dropzone-trigger">Upload</a>-->
+			<div id="dropzone-container" class="active">
+				<div id="dropzone" class="fade well">
+					<h5>請將檔案拖曳到這上傳</h5>
+					<p>或</p>
+					<div class="fileUpload flat-btn inline-block vertical-align--middle">
+				    <span>選擇檔案</span>
+				    <%= f.file_field :image, multiple: true, name: 'image[image]', class: 'upload' %>
 					</div>
-				</div>
-				<div id="progress">
-					<div class="progress-bar" style="width: 0%;"></div>
-				</div>
-				<div id="upload-items">
+					<p>最大上傳檔案大小：1 MB。</p>
 				</div>
 			</div>
-		<% end %>
-	</div>
-	<div class="image-list" id="image-list">
-		<% @images.each do |image| %>
-			<div class="image-item" id="<%= image.id %>" style="background-image:url(<%= image_path image.image_url.to_s %>)">
+			<div id="progress">
+				<div class="progress-bar" style="width: 0%;"></div>
 			</div>
-		<% end %>
+			<div id="upload-items">
+			</div>
+		</div>
+		<div id="image-list-tab-content" class="image-list-tab-content">
+			<div class="image-list"  id="image-list">
+				<% @images.each do |image| %>
+					<div class="image-item" id="<%= image.id %>" style="background-image:url(<%= image_path image.image_url.to_s %>)">
+					</div>
+				<% end %>
+			</div>
+			<div class="image-info">
+
+			</div>
+		</div>
+	<% end %>
+	<div class="bottom-bar">
+		<a class="flat-btn" id="select-image-btn" target="">設定圖片</a>
 	</div>
 </div>
 <script type="text/javascript">
+
+$(document).on('click', '#select-image-btn', function(){
+	if($('.selected-image').length > 0){
+		var selected_image_id = $('.selected-image').attr('id');
+	}else{
+		flash.error('您尚未選擇任何圖片');
+		return false;
+	}
+
+	var target = $('#image-selector').attr('target');
+	$('#' + target).val(selected_image_id).trigger('change');
+	$('#image-selector').removeClass('active');
+	$('#image-selector-cover').removeClass('active');
+})
+
+$(document).on('click', '.image-selector-trigger', function(){
+	var target = $(this).attr('target');
+	$('#image-selector-cover').addClass('active');
+	$('#image-selector').attr('target', target).addClass('active');
+})
+
+$(document).on('click', '#close-image-selector', function(){
+	$('#image-selector-cover').removeClass('active');
+	$('#image-selector').removeClass('active');
+})
+
+$(document).on('click', '.image-item', function(){
+	if(!$(this).hasClass('selected-image')){
+		$(this).siblings('.image-item').removeClass('selected-image');
+	}
+	$(this).toggleClass('selected-image');
+})
+
 $(function () {
     $('#image_image').fileupload({
         dataType: 'script',
@@ -102,21 +149,6 @@ $(function () {
 		    dropZone: $('#dropzone')
     });
 });
-/*
-$(function () {
-    $('#image_image').fileupload({
-        dataType: 'script',
-        progressall: function (e, data) {
-	        var progress = parseInt(data.loaded / data.total * 100, 10);
-	        $('#progress .progress-bar').css(
-	            'width',
-	            progress + '%'
-	        ).text(progress + '%');
-		    },
-		    dropZone: $('#dropzone')
-    });
-});
-*/
 
 $('#dropzone-trigger').click(function(){
 	$('#dropzone-container').slideToggle(500);

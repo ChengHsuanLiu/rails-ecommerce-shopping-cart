@@ -10,6 +10,21 @@ class Admin::ImagesController < ApplicationController
   	@image = Image.new
   end
 
+  def get_image_url
+    image_id = params[:image_id].to_i if params[:image_id].present?
+    @image = Image.find(image_id)
+    @image_url = @image.image_url
+
+    respond_to do |format|
+      format.json { render json:
+        {
+          state: 'success',
+          image_url: @image_url
+        }
+      }
+    end
+  end
+
   def create
   	@image = Image.create(images_params)
   end

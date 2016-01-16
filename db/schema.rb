@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114032910) do
+ActiveRecord::Schema.define(version: 20160116103856) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160114032910) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "user_id"
+    t.text     "special_note"
   end
 
   create_table "post_categories", force: :cascade do |t|
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(version: 20160114032910) do
     t.boolean  "is_child_product",  default: false
     t.integer  "parent_product_id"
     t.boolean  "stock_active",      default: false
+    t.integer  "feature_image_id"
   end
 
   create_table "user_cart_items", force: :cascade do |t|
