@@ -163,7 +163,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-	  @product = Product.find(params[:id])
+	  @product = Product.find(params[:id].to_i)
     @product.update({ name: params[:name].to_s, brand_id: params[:brand_id].to_i, brief: params[:brief], description: params[:description], is_multi_option: params[:is_multi_option],
         sku: params[:sku].to_s, list_price: params[:list_price].to_f, sale_price: params[:sale_price].to_f,
         stock: params[:stock].to_i , weight: params[:weight].to_f, height: params[:height].to_f, length: params[:length].to_f,

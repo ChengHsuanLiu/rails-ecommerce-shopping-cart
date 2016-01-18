@@ -25,5 +25,5 @@ class Product < ActiveRecord::Base
   validates :available, :inclusion => {:in => [true, false]}
   validates :is_child_product, :inclusion => {:in => [true, false]}
   validates :stock_active, :inclusion => {:in => [true, false]}
-  validates :name, presence: true
+  validates :name, :list_price, presence: true
 end

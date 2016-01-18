@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :brands
     resources :orders
     resources :images
+    resources :users
     resources :posts do
       resources :post_comments
     end

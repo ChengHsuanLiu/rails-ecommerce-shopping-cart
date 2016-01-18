@@ -1,3 +1,15 @@
 <%= form_for @post, :url => admin_posts_path do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 <% end %>
+<%= render ('partials/image_selector') %>
+<script type="text/javascript">
+	$(document).on('change', '#post_feature_image_id', function(){
+		var image_id = $(this).val();
+		var reqURL = '<%= admin_images_get_image_url_path %>' + '?image_id=' + image_id;
+		console.log(reqURL);
+		$.get(reqURL, function(res){
+			var image_url = res["image_url"];
+			$('#feature-image-block').html('<img src="' + image_url + '" />');
+		})
+	})
+</script>

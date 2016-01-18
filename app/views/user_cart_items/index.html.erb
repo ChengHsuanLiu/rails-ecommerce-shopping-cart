@@ -24,7 +24,14 @@
 							<tr>
 								<td>
 									<div class="cart-product-img">
-										<%= image_tag('http://cdn.shopify.com/s/files/1/0037/5472/products/0706412401_2_1_1_large.jpg?v=1373476417') %>
+										<% if user_cart_item.product.parent_products.count > 0 %>
+											<% @image = Image.find(user_cart_item.product.parent_products.first.feature_image_id) %>
+										<% else %>
+											<% @image = Image.find(user_cart_item.product.feature_image_id) %>
+										<% end %>
+
+
+										<%= image_tag(@image.image_url, class: 'product-img') %>
 									</div>
 								</td>
 								<td>

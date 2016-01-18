@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116172943) do
+ActiveRecord::Schema.define(version: 20160118041436) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -72,8 +72,11 @@ ActiveRecord::Schema.define(version: 20160116172943) do
     t.integer  "post_category_id"
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "feature_image_id"
+    t.boolean  "visible",          default: true
+    t.boolean  "is_draft",         default: false
   end
 
   create_table "product_attributes", force: :cascade do |t|

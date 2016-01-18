@@ -19,7 +19,8 @@
 						<% @products.each do |product| %>
 							<div class="product-item">
 								<div class="image-link" href="<%= product_path(product) %>">
-									<%= image_tag('http://cdn.shopify.com/s/files/1/0037/5472/products/0706412401_2_1_1_large.jpg?v=1373476417', class: 'product-img') %>
+									<% @image = Image.find(product.feature_image_id) %>
+									<%= image_tag(@image.image_url, class: 'product-img') %>
 									<span class="icon">
 										<i class="material-icons">link</i>
 									</span>

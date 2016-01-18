@@ -18,10 +18,102 @@
 					</div>
 					<div style="clear: both;"></div>
 					<div class="col s12">
-						<%= f.submit "發表", class:'btn submit-btn' %>
+						<p>可見文章</p>
+						<div class="switch">
+						  <label>
+						    隱藏
+						    <%= f.check_box :visible %>
+						    <span class="lever"></span>
+						    可見
+						  </label>
+						</div>
+						<p>草稿</p>
+						<div class="switch">
+						  <label>
+						    否
+						    <%= f.check_box :is_draft %>
+						    <span class="lever"></span>
+						    是
+						  </label>
+						</div>
+						<%= f.submit "發表", class:'btn submit-btn', id:'post-submit' %>
 					</div>
+				</div>
+			</div>
+			<div class="dashboard-right-card">
+				<h5>特色圖片</h5>
+				<div class="hr margin-bottom-s"></div>
+				<a class="image-selector-trigger" target="post_feature_image_id">選擇特色圖片</a>
+				<%= f.text_field :feature_image_id, class: 'hide' %>
+				<div class="feature-image-block" id="feature-image-block">
+
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+		// 按下 submit 按鈕時，呼叫打包資料程式獲取資料並且送出
+		$('#post-submit').click(function(event){
+			$('#preloader-container').addClass('active');
+			event.preventDefault();
+			var dataAll = getPostData();
+			var reqURL = "<%= admin_posts_path %>";
+
+		  $.ajax({
+		    url: reqURL,
+		    type : "POST",
+		    data : dataAll,
+		    dataType :"html",
+		    success : function(res){
+		    	var response = $.parseJSON(res);
+		    	var state = response["state"];
+		    	var redirect_url;
+		    	var message = '例外情況發生，請聯絡您的網站管理員';
+		    	$('#preloader-container').removeClass('active');
+
+		    	if(state == 'success'){
+		    		message = '成功創建文章';
+		    		redirect_url = response["redirect_url"];
+		    		window.location.replace(redirect_url);
+		    	}else if (state == 'error'){
+		    		message = response["error"];
+		    		flash.error(message);
+		    	}
+		    },
+		    error: function(res){
+		    	$('#preloader-container').removeClass('active');
+		    	flash.error('網路或是伺服器出錯，請檢查您的網路連線，或是通報您的網站管理員');
+		    }
+		  });
+
+			return false;
+		})
+
+	//**********************************************
+	//
+	// 函式庫
+	//**********************************************
+
+		// 按下 submit 時，打包要 post 的資料並回傳
+		function getPostData(){
+			tinymce.triggerSave();
+			var post_title = $('#post_title').val();
+			var post_body = $('#post_body').val();
+			var post_feature_image_id = $('#post_feature_image_id').val();
+			var post_visible = $('#post_visible').prop('checked');
+			var post_is_draft = $('#post_is_draft').prop('checked');
+			var post_category_id = $('#post_post_category_id option:selected').val();
+
+			var dataAll = {
+				title: post_title,
+				body: post_body,
+				feature_image_id: post_feature_image_id,
+				visible: post_visible,
+				is_draft: post_is_draft,
+				post_category_id: post_category_id
+			}
+			return dataAll;
+		}
+</script>
+
