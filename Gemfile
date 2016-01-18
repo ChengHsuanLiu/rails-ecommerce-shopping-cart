@@ -22,9 +22,15 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+# User
 gem 'devise'
+
+# User Facebook Login
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+# assets
 gem 'materialize-sass'
 gem 'ionicons-rails'
 gem "kaminari"
