@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119041130) do
+ActiveRecord::Schema.define(version: 20160121070155) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -87,6 +87,12 @@ ActiveRecord::Schema.define(version: 20160119041130) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_child_products", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "child_product_id"
@@ -138,22 +144,23 @@ ActiveRecord::Schema.define(version: 20160119041130) do
     t.text     "description"
     t.float    "list_price"
     t.float    "sale_price"
-    t.integer  "stock",             default: 1
+    t.integer  "stock",               default: 1
     t.string   "sku"
     t.float    "weight"
     t.float    "height"
     t.float    "length"
     t.float    "width"
-    t.boolean  "is_multi_option",   default: false
-    t.boolean  "visible",           default: true
-    t.boolean  "available",         default: true
+    t.boolean  "is_multi_option",     default: false
+    t.boolean  "visible",             default: true
+    t.boolean  "available",           default: true
     t.integer  "brand_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "is_child_product",  default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "is_child_product",    default: false
     t.integer  "parent_product_id"
-    t.boolean  "stock_active",      default: false
+    t.boolean  "stock_active",        default: false
     t.integer  "feature_image_id"
+    t.integer  "product_category_id"
   end
 
   create_table "shop_notifications", force: :cascade do |t|

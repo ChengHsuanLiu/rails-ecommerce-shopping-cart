@@ -21,13 +21,11 @@
 			<div class="admin-table-container">
 				<div class="row">
 					<div class="col m8 s12 no-padding">
-						<div class="search-box search-box--right">
-							<% if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined' %>
-								<input value="<%= params[:keyword] %>" class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
-							<% else %>
-								<input class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
+						<div class="search-box">
+							<%= form_tag(admin_users_path, :method => "get") do %>
+								<%= text_field_tag :keyword, params[:keyword], class: "search-box-input", placeholder: "姓名、信箱、id.." %>
+								<button type="submit" class="btn search-box-submit" id="search-box-submit">搜尋會員</button>
 							<% end %>
-							<a class="btn search-box-submit" id="search-box-submit">搜尋會員</a>
 						</div>
 					</div>
 					<div class="col m4 s12 no-padding">
@@ -66,10 +64,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$('#search-box-submit').click(function(){
-		var keyword = $('#search-box-input').val();
-		var reqURL = '<%= request.url %>?' + 'keyword=' + keyword ;
-		window.location.href = reqURL;
-	})
-</script>

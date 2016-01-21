@@ -4,7 +4,10 @@ class Admin::PostsController < ApplicationController
 	layout 'admin'
 
   def index
-  	@posts = Post.all
+    @posts = Post.all
+    @keyword = "%" + params[:keyword] + "%" if params[:keyword].present?
+    @posts = @posts.where("title LIKE ?", @keyword) if params[:keyword].present?
+  	@posts = @posts.page(params[:page]).per(1)
   end
 
   def new

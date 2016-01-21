@@ -1,0 +1,27 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col s12">
+			<h4>商品分類總覽</h4>
+			<a href="<%= new_admin_product_category_path %>" class="btn">新增商品分類</a>
+
+			<div class="admin-table-container">
+	      <table>
+	        <thead>
+	          <tr>
+	              <th data-field="name">名稱</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	        	<% @product_categories.each do |pc| %>
+		          <tr>
+		            <td><a href="<%= edit_admin_product_category_path(pc) %>"><%= pc.name %></a></td>
+		          </tr>
+	        	<% end %>
+	        </tbody>
+	      </table>
+			</div>
+
+		</div>
+	</div>
+</div>

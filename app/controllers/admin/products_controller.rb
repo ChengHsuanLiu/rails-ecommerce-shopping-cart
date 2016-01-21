@@ -5,13 +5,14 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @brands = Brand.all
+    @product_categories = ProductCategory.all
   	@products = Product.where(is_child_product: false)
 
     @keyword = "%" + params[:keyword] + "%" if params[:keyword].present?
-    @brand_id = "%" + params[:brand_id] + "%" if params[:brand_id].present?
 
-    @products = @products.where(brand_id: brand_id)
-    @products = @products.where("name LIKE ?", @keyword) if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined'
+    @products = @products.where(brand_id: params[:brand_id].to_i) if params[:brand_id].present?
+    @products = @products.where(product_category_id: params[:product_category_id].to_i) if params[:product_category_id].present?
+    @products = @products.where("name LIKE ?", @keyword) if params[:keyword].present?
     @products = @products.page(params[:page]).per(1)
   end
 
@@ -39,6 +40,7 @@ class Admin::ProductsController < ApplicationController
     @product.length = params[:length].to_f
     @product.width = params[:width].to_f
     @product.feature_image_id = params[:feature_image_id].to_i
+    @product.product_category_id = params[:product_category_id].to_i
 
     product_attributes = ActiveSupport::JSON.decode(params[:product_attributes])
     product_attributes.each do |pa|
@@ -51,7 +53,7 @@ class Admin::ProductsController < ApplicationController
         brand_id: @product.brand_id, brief: @product.brief, description: @product.description,
         sku: @product.sku, list_price: @product.list_price, sale_price: @product.sale_price,
         stock: cp["stock"].to_i , weight: @product.weight, height: @product.height, length: @product.length,
-        width: @product.width, is_child_product: true, visible: @product.visible, available: @product.available, feature_image_id: @product.feature_image_id  })
+        width: @product.width, is_child_product: true, visible: @product.visible, available: @product.available, feature_image_id: @product.feature_image_id, product_category_id: @product.product_category_id  })
     end
 
     respond_to do |format|
@@ -174,7 +176,7 @@ class Admin::ProductsController < ApplicationController
     @product.update({ name: params[:name].to_s, brand_id: params[:brand_id].to_i, brief: params[:brief], description: params[:description], is_multi_option: params[:is_multi_option],
         sku: params[:sku].to_s, list_price: params[:list_price].to_f, sale_price: params[:sale_price].to_f,
         stock: params[:stock].to_i , weight: params[:weight].to_f, height: params[:height].to_f, length: params[:length].to_f,
-        width: params[:width].to_f, is_child_product: true, visible: params[:visible], available: params[:available], feature_image_id: params[:feature_image_id]  })
+        width: params[:width].to_f, is_child_product: false, visible: params[:visible], available: params[:available], feature_image_id: params[:feature_image_id], product_category_id: params[:product_category_id]  })
 
     product_attributes = ActiveSupport::JSON.decode(params[:product_attributes])
     product_attributes.each do |pa|
@@ -183,7 +185,12 @@ class Admin::ProductsController < ApplicationController
 
     child_products = ActiveSupport::JSON.decode(params[:child_products])
     child_products.each do |cp|
-      @child_product = Product.find(cp["id"].to_i).update({ name: cp["name"].to_s, stock: cp["stock"].to_i })
+      @child_product = Product.find(cp["id"].to_i).update({ name: cp["name"].to_s, stock: cp["stock"].to_i,
+        brand_id: params[:brand_id].to_i, brief: params[:brief], description: params[:description],
+        sku: params[:sku].to_s, list_price: params[:list_price].to_f,
+        sale_price: params[:sale_price].to_f, weight: params[:weight].to_f, height: params[:height].to_f,
+        length: params[:length].to_f, width: params[:width].to_f, visible: params[:visible],
+        available: params[:available], feature_image_id: params[:feature_image_id], product_category_id: params[:product_category_id] })
     end
 
     respond_to do |format|

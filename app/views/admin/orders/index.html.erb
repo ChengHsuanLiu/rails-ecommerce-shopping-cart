@@ -21,14 +21,12 @@
 			<div class="admin-table-container">
 				<div class="row">
 					<div class="col m8 s12 no-padding">
-						<div class="search-box search-box--right">
-							<% if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined' %>
-								<input value="<%= params[:keyword] %>" class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
-							<% else %>
-								<input class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
-							<% end %>
-							<a class="btn search-box-submit" id="search-box-submit">搜尋訂單</a>
-						</div>
+						<%= form_tag(admin_orders_path, :method => "get") do %>
+							<div class="search-box search-box--right">
+								<%= text_field_tag :keyword, params[:keyword], class: "search-box-input", placeholder: "請輸入關鍵字.." %>
+								<button type="submit" class="btn search-box-submit" id="search-box-submit">搜尋訂單</button>
+							</div>
+						<% end %>
 					</div>
 					<div class="col m4 s12 no-padding">
 						<%= paginate @orders %>
@@ -92,10 +90,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$('#search-box-submit').click(function(){
-		var keyword = $('#search-box-input').val();
-		var reqURL = '<%= request.url %>?' + 'keyword=' + keyword ;
-		window.location.href = reqURL;
-	})
-</script>

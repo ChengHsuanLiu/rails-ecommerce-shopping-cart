@@ -22,26 +22,14 @@
 			<div class="admin-table-container">
 				<div class="row">
 					<div class="col m8 s12 no-padding">
-						<select class="browser-default admin-table-select">
-					    <option value="" disabled selected>選擇品牌</option>
-					    <option value="1">Option 1</option>
-					    <option value="2">Option 2</option>
-					    <option value="3">Option 3</option>
-					  </select>
-						<select class="browser-default admin-table-select">
-					    <option value="" disabled selected>選擇分類</option>
-					    <option value="1">Option 1</option>
-					    <option value="2">Option 2</option>
-					    <option value="3">Option 3</option>
-					  </select>
-						<div class="search-box search-box--right">
-							<% if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined' %>
-								<input value="<%= params[:keyword] %>" class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
-							<% else %>
-								<input class="search-box-input" id="search-box-input" type="text" placeholder="請輸入關鍵字.." />
-							<% end %>
-							<a class="btn search-box-submit" id="search-box-submit">搜尋商品</a>
-						</div>
+						<%= form_tag(admin_products_path, :method => "get") do %>
+							<%= select_tag 'brand_id', options_from_collection_for_select(@brands, 'id', 'name'), include_blank: "全部品牌", class: 'browser-default admin-table-select' %>
+							<%= select_tag "product_category_id", options_from_collection_for_select(@product_categories, "id", "name"), include_blank: "全部分類", class: 'browser-default admin-table-select' %>
+							<div class="search-box search-box--right">
+								<%= text_field_tag :keyword, params[:keyword], class: "search-box-input", placeholder: "請輸入關鍵字.." %>
+								<button type="submit" class="btn search-box-submit" id="search-box-submit">搜尋商品</button>
+							</div>
+						<% end %>
 					</div>
 					<div class="col m4 s12 no-padding">
 						<%= paginate @products %>
@@ -91,9 +79,11 @@
 	</div>
 </div>
 <script type="text/javascript">
+	/*
 	$('#search-box-submit').click(function(){
 		var keyword = $('#search-box-input').val();
 		var reqURL = '<%= request.url %>?' + 'keyword=' + keyword ;
 		window.location.href = reqURL;
 	})
+	*/
 </script>

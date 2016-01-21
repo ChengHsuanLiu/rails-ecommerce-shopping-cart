@@ -16,6 +16,12 @@
 					</div>
 				</div>
 				<div class="row">
+					<p class="col m3 s12">分類</p>
+					<div class="col m9 s12 no-padding">
+						<%= f.collection_select(:product_category_id, ProductCategory.all, :id, :name, {}, {:class=> 'browser-default'}) %>
+					</div>
+				</div>
+				<div class="row">
 					<p class="col m3 s12">簡述</p>
 					<%= f.text_field :brief, class: 'col m9 s12' %>
 				</div>
@@ -273,6 +279,7 @@
 			var product_is_multi_option = $('#product_is_multi_option').prop('checked');
 			var product_visible = $('#product_visible').prop('checked');
 			var product_available = $('#product_available').prop('checked');
+			var product_category_id = $('#product_product_category_id').val();
 			var child_products = [];
 			var product_attributes = [];
 
@@ -313,7 +320,8 @@
 				is_multi_option: product_is_multi_option,
 				visible: product_visible,
 				available: product_available,
-				feature_image_id: product_feature_image_id
+				feature_image_id: product_feature_image_id,
+				product_category_id: product_category_id
 			}
 			return dataAll;
 		}
