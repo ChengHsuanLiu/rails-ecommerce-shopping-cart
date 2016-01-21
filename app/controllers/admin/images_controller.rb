@@ -1,4 +1,6 @@
 class Admin::ImagesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :get_shop_notifications, :only => [:index, :new, :edit]
 	layout 'admin'
 
   def index
@@ -57,5 +59,9 @@ class Admin::ImagesController < ApplicationController
 
   def images_params
     params.require(:image).permit(:image)
+  end
+
+  def get_shop_notifications
+    @shop_notifications = ShopNotification.all
   end
 end

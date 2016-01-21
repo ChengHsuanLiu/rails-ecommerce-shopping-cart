@@ -1,9 +1,16 @@
 class Admin::ProductsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :get_shop_notifications, :only => [:index, :new, :edit]
 	layout 'admin'
 
   def index
+    @brands = Brand.all
   	@products = Product.where(is_child_product: false)
+
     @keyword = "%" + params[:keyword] + "%" if params[:keyword].present?
+    @brand_id = "%" + params[:brand_id] + "%" if params[:brand_id].present?
+
+    @products = @products.where(brand_id: brand_id)
     @products = @products.where("name LIKE ?", @keyword) if params[:keyword].present? && params[:keyword] != '' && params[:keyword] != 'undefined'
     @products = @products.page(params[:page]).per(1)
   end
@@ -216,5 +223,9 @@ class Admin::ProductsController < ApplicationController
 
   def products_params
     params.require(:product).permit(:name, :brief, :description, :list_price, :sale_price, :stock, :sku, :weight, :height, :length, :width, :is_multi_option, :visible, :available, :brand_id, :is_child_product, :parent_product_id, :feature_image_id)
+  end
+
+  def get_shop_notifications
+    @shop_notifications = ShopNotification.all
   end
 end

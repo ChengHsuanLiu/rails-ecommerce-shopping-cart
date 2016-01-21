@@ -1,4 +1,6 @@
 class Admin::PostCategoriesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :get_shop_notifications, :only => [:index, :new, :edit]
 	layout 'admin'
 
   def index
@@ -46,5 +48,9 @@ class Admin::PostCategoriesController < ApplicationController
 
   def post_categories_params
     params.require(:post_category).permit(:name)
+  end
+
+  def get_shop_notifications
+    @shop_notifications = ShopNotification.all
   end
 end
