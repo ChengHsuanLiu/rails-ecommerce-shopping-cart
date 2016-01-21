@@ -13,7 +13,7 @@ class UserCartItemsController < ApplicationController
 		end
 
 		@total = @subtotal
-		@user_cart_items = current_user.user_cart_items
+		@user_cart_items = current_user.user_cart_items.includes(product: [:parent_products])
 	end
 
   def create
