@@ -9,14 +9,30 @@
     <ul class="right">
       <li><a href="<%= user_cart_items_path %>"><i class="material-icons inline-icon margin-right">shopping_cart</i>購物車</a></li>
       <% if user_signed_in? %>
-        <li><a>Hi, <%= current_user.name %></a></li>
-        <li><%= link_to '登出', destroy_user_session_path, :method => :delete %></li>
+        <li class="drop-down">
+          <a><i class="material-icons inline-icon margin-right">person</i><%= current_user.name %></a>
+          <div class="drop-down-list drop-down--right">
+            <div class="drop-down-list-inner">
+              <div class="arrow-up"></div>
+              <ul>
+                <li><a>DASHBOARD</a></li>
+                <li><a>EDIT PROFILE</a></li>
+                <li><%= link_to 'SIGN OUT', destroy_user_session_path, :method => :delete %></li>
+                <% if current_user.is_admin %>
+                  <div class="hr margin-top-s margin-bottom-s"></div>
+                  <li><a>ADMIN BOARD</a></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </li>
       <% else %>
         <li><a href="<%= new_user_session_path %>">登入</a></li>
       <% end %>
     </ul>
   </div>
 </nav>
+
 <nav class="fixed-nav">
   <div class="nav-wrapper container">
     <a href="<%= root_path %>" class="brand-logo">Colorgy Shop</a>

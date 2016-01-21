@@ -1,15 +1,20 @@
-<div class="side-menu">
+<div class="side-menu admin">
 	<div class="side-menu-inner">
 		<ul class="collapsible" data-collapsible="accordion">
+			<li>
+				<a href="<%= admin_index_path %>">
+					<div class="collapsible-header"><i class="ion-ios-home-outline"></i>後台首頁</div>
+				</a>
+			</li>
 
 			<li>
 				<a href="<%= admin_orders_path %>">
-					<div class="collapsible-header"><i class="material-icons">list</i>訂單管理</div>
+					<div class="collapsible-header"><i class="ion-ios-paper-outline"></i>訂單管理</div>
 				</a>
 			</li>
 
 	    <li>
-	      <div class="collapsible-header"><i class="material-icons">shopping_cart</i>商品管理區</div>
+	      <div class="collapsible-header"><i class="ion-ios-cart-outline"></i>商品管理區</div>
 	      <div class="collapsible-body">
 	      	<ul>
 	      		<li><a href="<%= admin_products_path %>">商品</a></li>
@@ -21,7 +26,7 @@
 	    </li>
 
 	    <li>
-	      <div class="collapsible-header"><i class="material-icons">description</i>文章管理區</div>
+	      <div class="collapsible-header"><i class="ion-ios-paper-outline"></i>文章管理區</div>
 	      <div class="collapsible-body">
 	      	<ul>
 	      		<li><a href="<%= admin_posts_path %>">文章</a></li>
@@ -32,7 +37,7 @@
 	    </li>
 
 			<li>
-	      <div class="collapsible-header"><i class="material-icons">comment</i>回應管理</div>
+	      <div class="collapsible-header"><i class="ion-ios-chatbubble-outline"></i>回應管理</div>
 	      <div class="collapsible-body">
 	      	<ul>
 	      		<li><a href="<%= admin_posts_path %>">文章回應</a></li>
@@ -43,13 +48,13 @@
 
 	    <li>
 	    	<a href="<%= admin_users_path %>">
-		      <div class="collapsible-header"><i class="material-icons">face</i>會員管理</div>
+		      <div class="collapsible-header"><i class="ion-ios-people-outline"></i>會員管理</div>
 	      </a>
 	    </li>
 
 	    <li>
 	    	<a href="<%= admin_images_path %>">
-		      <div class="collapsible-header"><i class="material-icons">collections</i>圖片庫</div>
+		      <div class="collapsible-header"><i class="ion-ios-camera-outline"></i>圖片庫</div>
 	      </a>
 	    </li>
 	  </ul>

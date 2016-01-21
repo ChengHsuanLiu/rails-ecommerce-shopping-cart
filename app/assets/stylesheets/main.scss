@@ -83,6 +83,18 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 	height: 32px;
 }
 
+.user-info-list{
+
+	img{
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 8px;
+	}
+}
+
 
 //**************************************************
 //--------------------------------------------------
@@ -186,6 +198,15 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 	vertical-align: middle;
 }
 
+.arrow-up {
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+
+	border-bottom: 12px solid black;
+}
+
 //**************************************************
 //--------------------------------------------------
 // 4. Components
@@ -199,6 +220,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 nav .brand-logo{
 	font-size: 1.6rem;
 	color: #575D5A;
+	padding: 0 8px;
 }
 
 .fixed-top-bar{
@@ -208,7 +230,7 @@ nav .brand-logo{
 	height: 32px;
 	line-height: 32px;
 	background-color: #7CB9B1;
-	z-index: 999;
+	z-index: 1000;
 
 	> .top-bar{
 		height: 100%;
@@ -808,3 +830,178 @@ thead{
 	padding: 0 12px;
 }
 
+//--------------------------------------------------
+// Drop Down
+//--------------------------------------------------
+
+.drop-down{
+	position: relative;
+
+	&:hover{
+		> .drop-down-list{
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	> .drop-down-list{
+		position: absolute;
+		opacity: 0;
+		top: calc(100% + 20px);
+		left: 0;
+		visibility: hidden;
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-o-transition: all 0.5s;
+		-ms-transition: all 0.5s;
+		min-width: 300px;
+		max-width: 500px;
+		border-top: 12px solid #EEE;
+
+
+		> .drop-down-list-inner{
+			background-color: #FFF;
+			position: relative;
+			border: 1px solid #EEE;
+			border-top: 0;
+			box-shadow: 1px 1px 3px rgba(0,0,0,.1);
+			padding: 24px;
+
+			li{
+				float: none;
+
+				> a{
+					padding: 8px 15px;
+
+					&:hover{
+						background-color: transparent;
+						margin-left: 8px;
+					}
+				}
+			}
+
+			> .arrow-up {
+				position: absolute;
+				top: -32px;
+				left: 12px;
+				border-bottom-color: #EEE;
+		    border-left: 16px solid transparent;
+		    border-right: 16px solid transparent;
+		    border-bottom: 20px solid #EEE;
+			}
+
+		}
+
+
+		&.drop-down--right{
+			left: auto;
+			right: 0;
+
+			> .drop-down-list-inner > .arrow-up {
+				position: absolute;
+				top: -32px;
+				left: auto;
+				right: 12px;
+			}
+		}
+
+	}
+
+	&.primary{
+		> .drop-down-list{
+			border-top: 12px solid #7CB9B1;
+
+			> .drop-down-list-inner .arrow-up {
+		    border-bottom: 20px solid #7CB9B1;
+			}
+		}
+	}
+}
+
+//--------------------------------------------------
+// Notification
+//--------------------------------------------------
+
+.notification-list{
+	> .title{
+		margin: 0 -1px;
+		background-color: #7CB9B1;
+		font-size: 20px;
+		padding: 4px 16px 8px 16px;
+		color: #FCFCFC;
+		overflow: hidden;
+	}
+}
+
+.notification-item{
+	padding: 12px 8px;
+	border-bottom: 1px solid #EEE;
+	transition: all .4s;
+	-webkit-transition: all .4s;
+	-moz-transition: all .4s;
+	-o-transition: all .4s;
+	-ms-transition: all .4s;
+	overflow: hidden;
+	position: relative;
+
+	> .dismiss-btn{
+		position: absolute;
+		right: 4px;
+		top: 4px;
+
+		> i{
+			font-size: 1.6rem;
+		}
+	}
+
+	&:hover{
+		padding-left: 16px;
+	}
+
+	> a{
+		&:hover{
+			background-color: transparent;
+		}
+	}
+}
+
+.notification-item-icon{
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.notification-item-body{
+	vertical-align: middle;
+	display: inline-block;
+	padding-left: 8px;
+}
+
+
+//--------------------------------------------------
+// Badges
+//--------------------------------------------------
+
+span.badge{
+	min-width: 1.5rem;
+	position: relative;
+	right: 0;
+	display: inline-block;
+	margin-left: 8px;
+	padding: 0 12px;
+
+	&.new{
+		border-radius: 12px;
+		background-color: #7CB9B1;
+	}
+}
+
+nav ul a span.badge{
+	line-height: 1.5rem;
+	position: relative;
+	margin-left: 8px;
+}
+
+span.badge.new:after{
+	content: '';
+}

@@ -61,6 +61,61 @@ select{
 	}
 }
 
+@media screen and (min-width: 993px){
+	.side-nav.mobile-side-nav{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.side-menu.admin{
+		display: none;
+		ul{
+			li{
+				padding-top: 0 !important;
+				padding-bottom: 0 !important;
+
+				a:hover{
+					background-color: transparent;
+
+				}
+			}
+		}
+	}
+
+	.admin-body--right{
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.mobile-side-nav > .side-menu.admin{
+		display: block;
+		position: relative;
+		width: auto;
+	}
+
+	.admin-body-inner{
+		padding: 24px 0;
+	}
+
+	.side-nav .collapsible-header{
+		margin: 0;
+	}
+
+	.side-nav a{
+		padding: 0;
+	}
+
+}
+
+.admin-table-container{
+	overflow: auto;
+
+	> .admin-table{
+		min-width: 1000px;
+	}
+}
+
 
 //**************************************************
 //--------------------------------------------------

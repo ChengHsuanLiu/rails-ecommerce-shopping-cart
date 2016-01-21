@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'admin/products/delete_attribute' => 'admin/products#delete_attribute'
 
   get 'admin/images/get_image_url' => 'admin/images#get_image_url'
+  get 'admin/index' => 'admin/pages#index'
 
   namespace :admin do
     resources :products

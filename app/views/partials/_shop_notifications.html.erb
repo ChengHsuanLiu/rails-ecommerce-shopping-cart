@@ -1,0 +1,22 @@
+<div class="notification-list">
+	<h5 class="title">Notifications</h5>
+	<% @shop_notifications.each do |sn| %>
+		<div class="notification-item">
+			<a class="dismiss-btn"><i class="material-icons">close</i></a>
+			<a href="<%= sn.url %>">
+				<span class="notification-item-icon">
+					<% if sn.category == 'order' %>
+						<i class="ion-ios-cart"></i>
+					<% elsif sn.category == 'chat' %>
+						<i class="ion-ios-chatbubble-outline"></i>
+					<% else %>
+						<i class="ion-ios-information-outline"></i>
+					<% end %>
+				</span>
+				<span class="notification-item-body">
+					<%= sn.body %>
+				</span>
+			</a>
+		</div>
+	<% end %>
+</div>

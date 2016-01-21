@@ -1,26 +1,40 @@
 
 <nav class="fixed-nav">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
-    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <a href="<%= admin_index_path %>" class="brand-logo">Colorgy Shop</a>
+    <a href="#" data-activates="mobile-side-nav" class="button-collapse"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
+      <li class="drop-down primary">
+        <a><i class="ion-ios-bell-outline inline-icon margin-right"></i>通知<span class="badge new">1</span></a>
+        <div class="drop-down-list drop-down--right">
+          <div class="drop-down-list-inner no-padding">
+            <div class="arrow-up"></div>
+            <%= render('partials/shop_notifications') %>
+          </div>
+        </div>
+      </li>
+      <% if user_signed_in? %>
+        <li class="user-info-list">
+          <a>
+            <%= image_tag current_user.avatar %>
+            Hi, <%= current_user.name %>
+          </a>
+        </li>
+      <% else %>
+      <% end %>
     </ul>
-    <ul class="side-nav" id="mobile-demo">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
+    <ul class="side-nav mobile-side-nav" id="mobile-side-nav">
+      <%= render('partials/admin_sidemenu') %>
     </ul>
   </div>
 </nav>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
     $(".button-collapse").sideNav();
   })
-
+  $('.dropdown-collapse-title').click(function(){
+    $(this).siblings('.dropdown-collapse-body').slideToggle(500);
+  })
 </script>

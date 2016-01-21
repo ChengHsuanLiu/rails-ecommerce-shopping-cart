@@ -2,11 +2,28 @@
 <html>
 <head>
   <title>RailseCommerceShoppingCart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <%= stylesheet_link_tag    'application', 'admin' %>
   <%= javascript_include_tag 'admin' %>
   <%= csrf_meta_tags %>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script>tinymce.init({ selector:'textarea' });</script>
+  <script>
+		tinymce.init({
+		  selector: 'textarea',
+		  height: 500,
+		  plugins: [
+		        "advlist autolink lists link image charmap print preview anchor",
+		        "searchreplace visualblocks code fullscreen",
+		        "insertdatetime media table contextmenu paste imagetools"
+		    ],
+		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+		  imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+		  content_css: [
+		    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+		    '//www.tinymce.com/css/codepen.min.css'
+		  ]
+		});
+  </script>
 </head>
 <body>
 	<%= render('partials/preloader') %>
