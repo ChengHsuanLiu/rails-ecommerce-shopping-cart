@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121070155) do
+ActiveRecord::Schema.define(version: 20160121102244) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160121070155) do
     t.integer  "feature_image_id"
     t.boolean  "visible",          default: true
     t.boolean  "is_draft",         default: false
+    t.boolean  "is_deleted"
   end
 
   create_table "product_attributes", force: :cascade do |t|
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 20160121070155) do
     t.boolean  "stock_active",        default: false
     t.integer  "feature_image_id"
     t.integer  "product_category_id"
+    t.boolean  "is_deleted"
   end
 
   create_table "shop_notifications", force: :cascade do |t|

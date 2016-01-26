@@ -25,12 +25,43 @@
 	</div>
 	<div class="image-list" id="image-list">
 		<% @images.each do |image| %>
-			<div class="image-item" id="<%= image.id %>" style="background-image:url(<%= image_path image.image_url.to_s %>)">
+			<div class="image-item" id="<%= image.id %>" image-url="<%= image.image_url.to_s %>" style="background-image:url(<%= image_path image.image_url.to_s %>)">
 			</div>
 		<% end %>
 	</div>
 </div>
+<div id="image-show-modal" image-url="" class="modal modal-fixed-footer">
+  <div class="modal-content text-align-center">
+  	<div id="image-show"></div>
+		<div class="hide" id="copy-image-url"></div>
+  </div>
+  <div class="modal-footer text-align-right">
+  	<a href="#!" class="modal-action outline-btn" id="copy-image-url-btn">複製圖片網址</a>
+    <a href="#!" class="modal-action modal-close outline-btn default">Close</a>
+  </div>
+</div>
 <script type="text/javascript">
+
+$(document).on('click', '#copy-image-url-btn' ,function(){
+  copyToClipboard('#copy-image-url');
+})
+
+function copyToClipboard(element) {
+  $("body").append("<input type='text' id='temp' style='position:absolute;opacity:0;'>");
+  $("#temp").val($(element).text()).select();
+  document.execCommand("copy");
+  $("#temp").remove();
+  flash.success('成功複製');
+}
+
+
+$(document).on('click', '.image-item', function(){
+	var image_url = $(this).attr('image-url');
+	$('#copy-image-url').html(image_url);
+	$('#image-show').html('<img src="' + image_url + '" />');
+	$('#image-show-modal').openModal();
+})
+
 $(function () {
     $('#image_image').fileupload({
         dataType: 'script',

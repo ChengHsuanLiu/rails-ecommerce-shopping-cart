@@ -25,7 +25,7 @@
 						<%= form_tag(admin_products_path, :method => "get") do %>
 							<%= select_tag 'brand_id', options_from_collection_for_select(@brands, 'id', 'name'), include_blank: "全部品牌", class: 'browser-default admin-table-select' %>
 							<%= select_tag "product_category_id", options_from_collection_for_select(@product_categories, "id", "name"), include_blank: "全部分類", class: 'browser-default admin-table-select' %>
-							<div class="search-box search-box--right">
+							<div class="search-box">
 								<%= text_field_tag :keyword, params[:keyword], class: "search-box-input", placeholder: "請輸入關鍵字.." %>
 								<button type="submit" class="btn search-box-submit" id="search-box-submit">搜尋商品</button>
 							</div>
@@ -65,8 +65,10 @@
 		            </td>
 		            <td><%= p.updated_at %></td>
 		            <td>
-		            	<a href="#" class="icon-btn"><i class="material-icons">edit</i>編輯</a>
-		            	<a href="#" class="icon-btn"><i class="material-icons">delete</i>刪除</a>
+		            	<a href="<%= edit_admin_product_path(p)  %>" class="icon-btn"><i class="material-icons">edit</i>編輯</a>
+									<%= button_to admin_product_path(p), :method => :delete, :class=>'icon-btn delete' , :confirm => "確定要刪除嗎？" do %>
+										<i class="material-icons">delete</i>刪除
+									<% end %>
 		            </td>
 		          </tr>
 	        	<% end %>

@@ -6,7 +6,7 @@ class Admin::ProductsController < ApplicationController
   def index
     @brands = Brand.all
     @product_categories = ProductCategory.all
-  	@products = Product.where(is_child_product: false)
+  	@products = Product.where(is_child_product: false, is_deleted: false)
 
     @keyword = "%" + params[:keyword] + "%" if params[:keyword].present?
 
@@ -215,14 +215,11 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
-    respond_to do |format|
-      format.json { render json:
-        {
-          status: "Product was successfully deleted.",
-          product: @product
-        }
-      }
+    @product.is_deleted = true
+
+    if @product.save!
+      flash[:success] = "成功刪除產品"
+      redirect_to admin_products_path
     end
   end
 
